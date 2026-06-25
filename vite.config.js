@@ -6,7 +6,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'https://multimedia.scmp.com/components/2026/flashingbackground-wgc',
+  base: 'https://multimedia.scmp.com/components/2026/elnino-wgc',
   server: {
     proxy: {
       '/api/multimedia': {

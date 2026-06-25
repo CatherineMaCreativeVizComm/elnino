@@ -1,0 +1,180 @@
+[
+  {
+    "id": "evt1",
+    "label": "xxxxx El Nino",
+    "event_type": "El Nino",
+    "start": "1997, 5",
+    "end": "1998, 9",
+    "pois": [
+      {
+        "location": "xxxxxx",
+        "lat": "0",
+        "lon": "-150",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[
+          {
+            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "story_link": "https://www.scmp.com/xxxxxxxx"
+          }
+        ]
+      },{
+        "location": "xxxxxx",
+        "lat": "2",
+        "lon": "-120",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[]
+      },{
+        "location": "xxxxxx",
+        "lat": "-2",
+        "lon": "-90",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[
+          {
+            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "story_link": "https://www.scmp.com/xxxxxxxx"
+          }
+        ]
+      }
+    ],
+    "event_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "scmp_article":[
+      {
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      },{
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      },{
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      }
+    ]
+  },{
+    "id": "evt2",
+    "label": "xxxxx La Nina",
+    "event_type": "La Nina",
+    "start": "2005, 8",
+    "end": "2006, 9",
+    "pois": [
+      {
+        "location": "xxxxxx",
+        "lat": "20",
+        "lon": "-130",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[
+          {
+            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "story_link": "https://www.scmp.com/xxxxxxxx"
+          }
+        ]
+      },{
+        "location": "xxxxxx",
+        "lat": "-9",
+        "lon": "-150",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[]
+      },{
+        "location": "xxxxxx",
+        "lat": "-26",
+        "lon": "-92",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[
+          {
+            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "story_link": "https://www.scmp.com/xxxxxxxx"
+          }
+        ]
+      }
+    ],
+    "event_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "scmp_article":[
+      {
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      },{
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      },{
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      }
+    ]
+  }, {
+    "id": "evt3",
+    "label": "xxxxx La Nina",
+    "event_type": "La Nina",
+    "start": "1975, 2",
+    "end": "1977, 3",
+    "pois": [
+      {
+        "location": "xxxxxx",
+        "lat": "-35",
+        "lon": "-128",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[
+          {
+            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "story_link": "https://www.scmp.com/xxxxxxxx"
+          }
+        ]
+      },{
+        "location": "xxxxxx",
+        "lat": "-19",
+        "lon": "-60",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[]
+      },{
+        "location": "xxxxxx",
+        "lat": "48",
+        "lon": "79",
+        "media_type": "image",
+        "media_url": "xxxxxx",
+        "caption_hd": "Lorem ipsum dolor sit amet",
+        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "scmp_article":[
+          {
+            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "story_link": "https://www.scmp.com/xxxxxxxx"
+          }
+        ]
+      }
+    ],
+    "event_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "scmp_article":[
+      {
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      },{
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      },{
+        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "story_link": "https://www.scmp.com/xxxxxxxx"
+      }
+    ]
+  }
+]

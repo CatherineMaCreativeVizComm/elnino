@@ -14,12 +14,7 @@
         "media_url": "xxxxxx",
         "caption_hd": "Lorem ipsum dolor sit amet",
         "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article":[
-          {
-            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "story_link": "https://www.scmp.com/xxxxxxxx"
-          }
-        ]
+        "scmp_article": ""
       },{
         "location": "xxxxxx",
         "lat": "2",
@@ -28,7 +23,7 @@
         "media_url": "xxxxxx",
         "caption_hd": "Lorem ipsum dolor sit amet",
         "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article":[]
+        "scmp_article":""
       },{
         "location": "xxxxxx",
         "lat": "-2",

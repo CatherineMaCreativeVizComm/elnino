@@ -7,6 +7,7 @@
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
+  import { scale } from "svelte/transition";
 
   const SHEET_ID = "1Vm6vxrxc9Y6-coeX2o2rSsnYmMO4NBubSP40Jn59Yuw";
   const API_KEY = "AIzaSyAPauL7gS0wK5bi9QVEbhjkzjwppBBU5_U";
@@ -16,6 +17,11 @@
     "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson";
   const EARTH_NORMAL_URL =
     "https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_normal_2048.jpg";
+
+  const MONTH_NAMES = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
 
   const SEAS_MAPPING = {
     DJF: { start_m: 12, end_m: 2, desc: "Winter" },
@@ -30,6 +36,11 @@
     SON: { start_m: 9, end_m: 11, desc: "Autumn" },
     OND: { start_m: 10, end_m: 12, desc: "Late Autumn / Early Winter" },
     NDJ: { start_m: 11, end_m: 1, desc: "Early Winter" },
+  };
+
+  const monthToSeas = {
+    1: "DJF", 2: "JFM", 3: "FMA", 4: "MAM", 5: "AMJ", 6: "MJJ",
+    7: "JJA", 8: "JAS", 9: "ASO", 10: "SON", 11: "OND", 12: "NDJ"
   };
 
   const ENSO_MAPPING = {
@@ -52,23 +63,25 @@
   let flatPois = [];
   let poiElements = [];
 
+  let countryLabels = [];
+  let countryLabelElements = [];
+
   let isLoading = true;
   let errorMessage = "";
 
-  let width = 0,
-    height = 0;
-  // Adjusted margins to fit the new text labels and axis title
-  const margin = { top: 40, right: 70, bottom: 60, left: 50 };
+  let width = 0, height = 0;
+  const margin = { top: 40, right: 15, bottom: 60, left: 20 };
+  
   $: innerWidth = Math.max(0, width - margin.left - margin.right);
   $: innerHeight = Math.max(0, height - margin.top - margin.bottom);
 
   let canvasElement;
   let dragZoneElement;
-  let globeWidth = 0,
-    globeHeight = 0;
+  let globeWidth = 0, globeHeight = 0;
   let renderer, scene, camera, controls;
   let tiltGroup, earthGroup, globeMesh;
   let poiGroup = new THREE.Group();
+  let labelGroup = new THREE.Group(); 
   let animationFrameId;
 
   let isFocusMode = false;
@@ -82,8 +95,17 @@
   const animationProgress = tweened(0, { duration: 1200, easing: cubicInOut });
   const poiGeometry = new THREE.SphereGeometry(0.01, 16, 16);
   const poiMaterial = new THREE.MeshBasicMaterial({ color: 0xff004d });
+  
+  const HK_LAT_LON = { lat: 22.3193, lon: 114.1694 }; 
 
-  $: dragSize = Math.min(globeWidth, globeHeight) * 0.72;
+  let hoveredBar = null;
+  let mousePos = { x: 0, y: 0 };
+
+  $: dragSize = Math.min(globeWidth, globeHeight) * 0.82;
+
+  $: aspect = globeWidth > 0 && globeHeight > 0 ? globeWidth / globeHeight : 1;
+  $: targetBaseZ = aspect < 1 ? 2.8 / aspect : 2.8; 
+  $: targetFocusZ = aspect < 1 ? 1.8 / aspect : 2.5; 
 
   $: xScale = d3
     .scaleBand()
@@ -93,7 +115,7 @@
   $: yExtent = d3.extent(chartData, (d) => d.anom_ssta) || [0, 0];
   $: yScale = d3
     .scaleLinear()
-    .domain([Math.min(-2.5, yExtent[0]), Math.max(2.5, yExtent[1])]) // Ensure scale fits reference lines
+    .domain([Math.min(-2.5, yExtent[0]), Math.max(2.5, yExtent[1])])
     .nice()
     .range([innerHeight, 0]);
 
@@ -136,7 +158,6 @@
     })
     .filter(Boolean);
 
-  // Mapped roniData into coordinates and created a continuous line path
   $: roniPoints = roniData
     .filter((d) => d.SEAS && d.YR && d.ANOM !== "")
     .map((d) => {
@@ -159,7 +180,7 @@
       if (x1 === undefined || x2 === undefined) return null;
       
       return {
-        x: x1 + (x2 - x1) / 2 + xScale.bandwidth() / 2, // Centered point
+        x: x1 + (x2 - x1) / 2 + xScale.bandwidth() / 2, 
         y: yScale(parseFloat(d.ANOM)),
       };
     })
@@ -172,11 +193,11 @@
 
   function latLongToVector3(lat, lon, radius) {
     const phi = (90 - lat) * (Math.PI / 180);
-    const theta = (lon + 90) * (Math.PI / 180);
+    const theta = (lon + 180) * (Math.PI / 180);
     return new THREE.Vector3(
       -(radius * Math.sin(phi) * Math.cos(theta)),
       radius * Math.cos(phi),
-      radius * Math.sin(phi) * Math.sin(theta),
+      radius * Math.sin(phi) * Math.sin(theta)
     );
   }
 
@@ -190,15 +211,16 @@
 
   function createWorldTexture(geoJsonData) {
     const canvas = document.createElement("canvas");
-    canvas.width = 2048;
-    canvas.height = 1024;
+    canvas.width = 4096;
+    canvas.height = 2048;
 
     const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#cce0ff";
+    ctx.fillStyle = "#153b65"; 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#f7f8fa";
-    ctx.strokeStyle = "#d2d4d6";
-    ctx.lineWidth = 1;
+    
+    ctx.fillStyle = "#f0f4f8";
+    ctx.strokeStyle = "#9ba4b5";
+    ctx.lineWidth = 1.0; 
 
     const projection = d3
       .geoEquirectangular()
@@ -212,6 +234,13 @@
       ctx.fill();
       ctx.stroke();
     });
+    
+    ctx.fillStyle = "#000"; 
+    const projectedHk = projection([HK_LAT_LON.lon, HK_LAT_LON.lat]);
+    ctx.beginPath();
+    ctx.arc(projectedHk[0], projectedHk[1], 4, 0, 2 * Math.PI); 
+    ctx.fill();
+    
     return new THREE.CanvasTexture(canvas);
   }
 
@@ -224,14 +253,26 @@
     scene.add(tiltGroup);
 
     earthGroup = new THREE.Group();
+    earthGroup.rotation.y = 2.2; 
     tiltGroup.add(earthGroup);
     earthGroup.add(poiGroup);
+    earthGroup.add(labelGroup); 
 
     flatPois.forEach((poi) => {
       const mesh = new THREE.Mesh(poiGeometry, poiMaterial);
       mesh.position.copy(latLongToVector3(poi.lat, poi.lon, 1.01));
       poiGroup.add(mesh);
       poi.mesh = mesh;
+    });
+    
+    countryLabels.forEach((label) => {
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.001, 6, 6), 
+        new THREE.MeshBasicMaterial({ color: 0x000000, visible: false }) 
+      );
+      mesh.position.copy(latLongToVector3(label.lat, label.lon, 1.01));
+      labelGroup.add(mesh);
+      label.mesh = mesh;
     });
 
     camera = new THREE.PerspectiveCamera(
@@ -240,7 +281,7 @@
       0.1,
       1000,
     );
-    camera.position.z = 3;
+    camera.position.z = targetBaseZ;
 
     renderer = new THREE.WebGLRenderer({
       canvas: canvasElement,
@@ -252,9 +293,9 @@
 
     controls = new OrbitControls(camera, dragZoneElement);
     controls.enablePan = false;
-    controls.enableZoom = true;
+    controls.enableZoom = false; 
     controls.minDistance = 1.5;
-    controls.maxDistance = 6.0;
+    controls.maxDistance = 10.0;
     controls.autoRotate = false;
 
     scene.add(new THREE.AmbientLight(0xffffff, 1.5));
@@ -270,8 +311,9 @@
       new THREE.MeshStandardMaterial({
         map: mapTexture,
         normalMap: normalMap,
-        roughness: 1.0,
-        metalness: 0.0,
+        normalScale: new THREE.Vector2(1, 1), 
+        roughness: 1,
+        metalness: 0,
       }),
     );
     earthGroup.add(globeMesh);
@@ -328,6 +370,26 @@
         element.style.display = "none";
       }
     });
+    
+    [...countryLabels].forEach((label, i) => {
+      const element = countryLabelElements[i];
+      if (!element || !label.mesh) return;
+      label.mesh.getWorldPosition(meshWorldPos);
+      
+      const dot = camPosNorm.dot(meshWorldPos.clone().normalize());
+      if (dot > 0.05) { 
+        const vector = meshWorldPos.project(camera);
+        const x = (vector.x * 0.5 + 0.5) * globeWidth;
+        const y = (vector.y * -0.5 + 0.5) * globeHeight;
+        const xOffset = label.name === 'Hong Kong' ? 10 : 0;
+        const yOffset = label.name === 'Hong Kong' ? -10 : -8;
+        
+        element.style.display = "block"; 
+        element.style.transform = `translate(${x + xOffset}px, ${y + yOffset}px)`;
+      } else {
+        element.style.display = "none";
+      }
+    });
   }
 
   function handlePeriodClick(period) {
@@ -340,12 +402,11 @@
     const localTarget = latLongToVector3(
       centerLatLon.lat,
       centerLatLon.lon,
-      2.2,
+      targetFocusZ
     );
 
     earthGroup.updateMatrixWorld();
     const worldTarget = localTarget.applyMatrix4(earthGroup.matrixWorld);
-
     endCamPos.copy(worldTarget);
 
     animationProgress.set(0, { duration: 0 });
@@ -356,6 +417,7 @@
   }
 
   function handleLabelClick(poi) {
+    if (poi.media_type === 'hk_anchor') return; 
     if (activePeriodId !== poi.periodId) {
       const targetPeriod = highlightPeriods.find((p) => p.id === poi.periodId);
       if (targetPeriod) {
@@ -374,7 +436,7 @@
     activePeriodId = null;
     flatPois = flatPois.map((p) => ({ ...p, showTooltip: false }));
     startCamPos.copy(camera.position);
-    endCamPos.copy(camera.position).normalize().multiplyScalar(3.5);
+    endCamPos.copy(camera.position).normalize().multiplyScalar(targetBaseZ);
 
     animationProgress.set(0, { duration: 0 });
     isAnimatingCamera = true;
@@ -414,10 +476,24 @@
     return { anmData, roni };
   }
 
+  function handleBarHover(event, d) {
+    if (window.innerWidth < 820) return; 
+    hoveredBar = d;
+    mousePos = { x: event.clientX, y: event.clientY };
+  }
+  
+  function handleBarLeave() {
+    hoveredBar = null;
+  }
+
   $: if (renderer && camera && globeWidth && globeHeight) {
     camera.aspect = globeWidth / globeHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(globeWidth, globeHeight);
+    
+    if (!isFocusMode && !isAnimatingCamera) {
+      camera.position.setLength(targetBaseZ);
+    }
   }
 
   onMount(async () => {
@@ -454,19 +530,49 @@
       const parsedData = parseSheetData(sheetJson);
       monthlyAnm = parsedData.anmData;
       roniData = parsedData.roni;
+      
+      const parsedCountries = (geoJsonData.features || [])
+        .map(feature => {
+          const name = feature.properties.name || feature.properties.ADMIN;
+          if (name === "Taiwan" || !name) return null;
+          if (name === "Hong Kong") return null;
+          const centroid = d3.geoCentroid(feature);
+          return { name, lat: centroid[1], lon: centroid[0], mesh: null };
+        })
+        .filter(Boolean);
+        
+      const hkAnchor = {
+          id: `hk_anchor`,
+          media_type: 'hk_anchor',
+          location: 'Hong Kong',
+          lat: HK_LAT_LON.lat,
+          lon: HK_LAT_LON.lon,
+          name: 'Hong Kong',
+          mesh: null
+      };
+      
+      countryLabels = [...parsedCountries, hkAnchor];
 
       highlightPeriods = fetchedHighlights;
       flatPois = highlightPeriods.flatMap((period) =>
-        period.pois.map((poi, i) => ({
+        (period.pois || []).map((poi, i) => ({
           id: `${period.id}-${i}`,
           periodId: period.id,
           lat: parseFloat(poi.lat),
           lon: parseFloat(poi.lon),
           location: poi.location || "Point",
           periodLabel: period.label || "",
+          media_type: poi.media_type || "",
+          media_url: poi.media_url || "",
+          caption_hd: poi.caption_hd || "",
+          caption_body: poi.caption_body || "",
+          scmp_article: (poi.scmp_article || []).map((article) => ({
+            story_hd: article.story_hd || "",
+            story_link: article.story_link || "",
+          })),
           showTooltip: false,
           mesh: null,
-        })),
+        }))
       );
 
       isLoading = false;
@@ -482,17 +588,16 @@
     if (renderer) renderer.dispose();
   });
 
-  // Customized yAxis to render dotted grid and remove solid boundary line
   function yAxis(node, { scale, width }) {
     const draw = (s, w) => {
       const axis = d3.axisLeft(s).tickSize(-w);
       d3.select(node)
         .call(axis)
-        .call((g) => g.select(".domain").remove()) // Remove main axis line
+        .call((g) => g.select(".domain").remove()) 
         .call((g) =>
           g.selectAll(".tick line")
-            .attr("stroke-dasharray", "2,2") // Dotted grid
-            .attr("stroke", "rgba(255, 255, 255, 0.2)")
+            .attr("stroke-dasharray", "1,2") 
+            .attr("stroke", "rgba(255, 255, 255, 0.1)")
         );
     };
     draw(scale, width);
@@ -503,26 +608,42 @@
     };
   }
 
-  // Customized xAxis to only show tick values every 5 years
-  function xAxis(node, { scale, data }) {
-    function draw(s, d) {
+  function xAxis(node, { scale, data, screenW }) {
+    function draw(s, d, w) {
+      const currentYear = new Date().getFullYear();
+      const step = w < 820 ? 10 : 5; 
+  
+      let targetYears = [];
+      for (let y = 1955; y <= 2025; y += step) {
+        targetYears.push(y);
+      }
+      if (!targetYears.includes(currentYear)) {
+        targetYears.push(currentYear);
+      }
+
       const tickValues = d
-        .filter((item) => item.month === 1 && parseInt(item.yr_ssta, 10) % 5 === 0)
+        .filter((item) => item.month === 1 && targetYears.includes(parseInt(item.yr_ssta, 10)))
         .map((item) => item.key);
+        
       const axis = d3
         .axisBottom(s)
         .tickValues(tickValues)
         .tickFormat((val) => val.split("-")[0]);
-      d3.select(node)
-        .call(axis)
-        .selectAll("text")
-        .attr("transform", "rotate(-45)")
-        .style("text-anchor", "end");
+      
+      const axisGroup = d3.select(node).call(axis);
+
+      axisGroup.selectAll(".tick line")
+        .attr("y1", -5)
+        .attr("y2", 5);
+
+      axisGroup.selectAll("text")
+        .attr("y", -15) 
+        .style("text-anchor", "middle");
     }
-    draw(scale, data);
+    draw(scale, data, screenW);
     return {
-      update({ scale: newScale, data: newData }) {
-        draw(newScale, newData);
+      update({ scale: newScale, data: newData, screenW: newW }) {
+        draw(newScale, newData, newW);
       },
     };
   }
@@ -534,7 +655,7 @@
   {:else if errorMessage}
     <div class="statusMsg error">{errorMessage}</div>
   {:else}
-      <div
+    <div
       class="globeCtn"
       bind:clientWidth={globeWidth}
       bind:clientHeight={globeHeight}
@@ -549,15 +670,27 @@
 
       {#if isFocusMode && activePeriod}
         <div class="introBox">
-          <div class="introHd">{activePeriod.label}</div>
-          <div class="introDesc">{activePeriod.event_desc}</div>
+          <div class="scrollContent">
+            <div class="introHd">{activePeriod.label}</div>
+            <div class="introDesc">{activePeriod.event_desc}</div>
+            {#if activePeriod.scmp_article && activePeriod.scmp_article.length > 0}
+              <div class="relatedArticleCtn">
+                <div class="relatedArticleHd">Related Articles</div>
+                {#each activePeriod.scmp_article as article}
+                  <div class="relatedArticle">
+                    <a href={article.story_link} target="_blank" rel="noreferrer">
+                      <span>{article.story_hd}</span> &#10145
+                    </a>
+                  </div>
+                {/each}
+              </div>
+            {/if}
+          </div>
         </div>
       {/if}
 
       {#if isFocusMode}
-        <button class="resetBtn" on:click={resumeRotation}>
-          ↺ Resume Rotation
-        </button>
+        <button class="resetBtn" on:click={resumeRotation}>Return</button>
       {/if}
 
       <div class="globeLabelCtn">
@@ -565,6 +698,7 @@
           <div
             bind:this={poiElements[i]}
             class="globeLabel"
+            class:activeLabel={poi.showTooltip}
             style="display: none;"
           >
             <button
@@ -577,28 +711,100 @@
             </button>
 
             {#if poi.showTooltip}
-              <div class="detailTooltip">
-                <div class="tlpHd">{poi.location}</div>
+              <div class="detailTooltip" transition:scale={{ duration: 350, start: 0.1, opacity: 0 }}>
+                <button 
+                  class="shrinkArrowBtn" 
+                  on:click|stopPropagation={() => toggleTooltip(poi.id)}
+                  aria-label="Close details"
+                >
+                  &#10005;
+                </button>
+                
+                <div class="scrollContent">
+                  <div>
+                  <div class="tlpHd">{poi.caption_hd}</div>
+                  <div class="tlpbody">{poi.caption_body}</div>
+                  
+                  {#if poi.media_url !== ""}
+                    <div class="tlpMediaCtn">
+                      {#if poi.media_type === "image"}
+                        <img src={poi.media_url} alt={poi.caption_hd} />
+                      {:else}
+                        <video bind:this={poi.videoRef} src={poi.media_url} playsinline muted loop></video>
+                        <button class="playBtn" on:click={() => {
+                          const v = poi.videoRef;
+                          v.paused ? v.play() : v.pause();
+                          poi = poi;
+                        }}>{poi.videoRef?.paused ? "▶" : "⏸"}</button>
+                      {/if}
+                    </div>
+                  {/if}
+
+                  {#if poi.scmp_article !== ""}
+                    <div class="relatedArticleCtn">
+                      <div class="relatedArticleHd">Related Articles</div>
+                      {#each poi.scmp_article as article}
+                        <div class="relatedArticle">
+                          <a href={article.story_link} target="_blank" rel="noreferrer">
+                            <span>{article.story_hd}</span>&#10145
+                          </a>
+                        </div>
+                      {/each}
+                    </div>
+                  {/if}
+                  </div>
+                </div>
               </div>
             {/if}
           </div>
         {/each}
+        
+        <div>
+        {#each countryLabels as label, i}
+          <div
+            bind:this={countryLabelElements[i]}
+            class="countryLabel"
+            class:hkAnchorLabel={label.name === 'Hong Kong'}
+            style="display: none;"
+          >
+            {label.name}
+          </div>
+        {/each}
+        </div>
       </div>
     </div>
 
-    <div class="chartCtn" bind:clientWidth={width} bind:clientHeight={height}>
+    <div class="chartCtn" bind:clientWidth={width} bind:clientHeight={height} style="position: relative;">
       {#if width > 0 && height > 0 && chartData.length > 0}
+        
+        <div class="htmlRefCtn">
+          {#each [
+            { val: 0.5, label: "weak" },
+            { val: 1.0, label: "moderate" },
+            { val: 1.5, label: "strong" },
+            { val: 2.0, label: "very strong" },
+            { val: -0.5, label: "weak" },
+            { val: -1.0, label: "moderate" },
+            { val: -1.5, label: "strong" },
+            { val: -2.0, label: "very strong" }
+          ] as ref}
+            <div class="refHtmlLabel" style="top: {margin.top + yScale(ref.val)}px;">
+              {ref.label}
+            </div>
+          {/each}
+        </div>
+
         <svg {width} {height}>
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             <g class="highlightLayer">
               {#each highlightBoxes as box}
                 <rect
                   class="highlightBox"
-                  class:active-highlight={activePeriodId === box.id}
+                  class:activeHighlight={activePeriodId === box.id}
                   x={box.x}
-                  y={0}
+                  y={box.event_type === "El Nino" ? -20 : yScale(0)}
                   width={box.width}
-                  height={innerHeight}
+                  height={box.event_type === "El Nino" ? yScale(0) + 20 : innerHeight - yScale(0) + 20}
                   role="button"
                   tabindex="0"
                   on:click={() => handlePeriodClick(box)}
@@ -611,21 +817,21 @@
                 />
                 <text
                   x={box.x + box.width / 2}
-                  y={-10}
+                  y={box.event_type === "El Nino" ? -28 : innerHeight + 35}
                   class="highlightText"
-                  class:active-text={activePeriodId === box.id}
-                  text-anchor="middle">{box.label || box.event_type}</text
-                >
+                  class:activeTxt={activePeriodId === box.id}
+                  text-anchor="middle">
+                  {box.label}
+                </text>
               {/each}
             </g>
 
             <g class="axisCtn">
-              <text x="0" y="-15" fill="#e0e0e0" font-weight="bold" font-size="13px" text-anchor="middle">Anomaly</text>
               <g class="axis yAxis" use:yAxis={{ scale: yScale, width: innerWidth }}></g>
               <g
                 class="axis xAxis"
                 transform={`translate(0, ${innerHeight})`}
-                use:xAxis={{ scale: xScale, data: chartData }}
+                use:xAxis={{ scale: xScale, data: chartData, screenW: width }}
               ></g>
               <line
                 x1="0"
@@ -635,38 +841,19 @@
                 stroke="white"
                 stroke-width="2"
               />
-            </g>
-
-            <g class="customReferenceLines">
-              {#each [
-                { val: 0.5, label: "weak" },
-                { val: 1.0, label: "moderate" },
-                { val: 1.5, label: "strong" },
-                { val: 2.0, label: "very strong" },
-                { val: -0.5, label: "weak" },
-                { val: -1.0, label: "moderate" },
-                { val: -1.5, label: "strong" },
-                { val: -2.0, label: "very strong" }
-              ] as ref}
-                <line
-                  x1="0"
-                  x2={innerWidth}
-                  y1={yScale(ref.val)}
-                  y2={yScale(ref.val)}
-                  stroke="rgba(255, 255, 255, 0.4)"
-                  stroke-dasharray="1,2"
-                  stroke-width="1"
-                />
-                <text
-                  x={innerWidth + 5}
-                  y={yScale(ref.val)}
-                  fill="#e0e0e0"
-                  alignment-baseline="middle"
-                  font-size="11px"
-                >
-                  {ref.label}
-                </text>
-              {/each}
+              <g class="customReferenceLines">
+                {#each [0.5, 1.0, 1.5, 2.0, -0.5, -1.0, -1.5, -2.0] as val}
+                  <line
+                    x1="0"
+                    x2={innerWidth}
+                    y1={yScale(val)}
+                    y2={yScale(val)}
+                    stroke="rgba(255, 255, 255, 0.4)"
+                    stroke-dasharray="1,2"
+                    stroke-width="1"
+                  />
+                {/each}
+              </g>
             </g>
 
             <g class="barLayer">
@@ -677,10 +864,12 @@
                   y={Math.min(yScale(d.anom_ssta), yScale(0))}
                   width={xScale.bandwidth()}
                   height={Math.abs(yScale(d.anom_ssta) - yScale(0))}
-                  fill={ENSO_MAPPING[d.ENSO]
-                    ? ENSO_MAPPING[d.ENSO].color
-                    : "#E0E0E0"}
-                  style="pointer-events: none;"
+                  fill={"#E0E0E0"}
+                  on:mouseenter={(e) => handleBarHover(e, d)}
+                  on:mousemove={(e) => handleBarHover(e, d)}
+                  on:mouseleave={handleBarLeave}
+                  style="cursor: pointer;"
+                  role="graphics-symbol"
                 />
               {/each}
             </g>
@@ -699,6 +888,21 @@
         </svg>
       {/if}
     </div>
+
+    {#if hoveredBar}
+      <div
+        class="barTooltip"
+        style="left: {mousePos.x + 15}px; top: {mousePos.y + 15}px;"
+      >
+        <div class="barHd">
+          {MONTH_NAMES[hoveredBar.month - 1]} {hoveredBar.yr_ssta}
+        </div>
+        <div class="barBd">
+          {ENSO_MAPPING[hoveredBar.ENSO]?.desc || 'Neutral'}
+        </div>
+      </div>
+    {/if}
+
   {/if}
 </section>
 
@@ -710,6 +914,7 @@
     margin: 0;
     padding: 0;
     min-width: 290px;
+    max-width: 1440px;
   }
   * {
     margin: 0;
@@ -719,24 +924,67 @@
     font-weight: 100;
     font-size: 12px;
   }
+
+  a, button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    pointer-events: auto;
+    cursor: pointer;
+    outline: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-decoration: none;
+  }
+
+  video::-webkit-media-controls {
+    display: none !important;
+  }
+
   .tempSpatialCtn {
-    background-color: #123b65;
-    height: 99vh;
-    width: 99vw;
+    background-color: #153b65;
+    height: 90vh;
+    width: 100%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
   }
   .chartCtn {
     width: 100%;
-    height: 40%;
+    height: 35%;
+  }
+
+  .htmlRefCtn {
+    position: absolute;
+    top: 0;
+    left: 20px; 
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .refHtmlLabel {
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%);
+    color: #e0e0e0;
+    font-size: 10px;
   }
 
   .globeCtn {
     width: 100%;
-    height: 55%;
+    height: 65%;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    position: relative;
   }
 
   .dragZone {
@@ -752,70 +1000,6 @@
     cursor: grabbing;
   }
 
-  .yAxis :global(.tick text),
-  .xAxis :global(.tick text), .xAxis :global(.tick line), .yAxis :global(.tick line) {
-    fill: #e0e0e0;
-    stroke: #e0e0e0;
-  }
-  .axis :global(path) {
-    stroke: #e0e0e0;
-  }
-
-  .highlightBox {
-    fill: rgba(255, 255, 255, 0.04);
-    stroke: rgba(255, 255, 255, 0.3);
-    stroke-dasharray: 4;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .highlightBox:hover,
-  .highlightBox:focus {
-    fill: rgba(255, 255, 255, 0.12);
-    outline: none;
-  }
-  .highlightText {
-    fill: #e0e0e0;
-    font-weight: 600;
-    font-size: 13px;
-    pointer-events: none;
-    transition: fill 0.3s;
-  }
-
-  .highlightBox.active-highlight {
-    fill: rgba(255, 255, 255, 0.15);
-    stroke: #ff004d;
-    stroke-width: 1.5;
-    stroke-dasharray: none;
-  }
-  .active-text {
-    fill: #ff004d;
-  }
-
-  .introBox {
-    position: absolute;
-    left: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 260px;
-    padding: 18px;
-    color: white;
-    border-radius: 6px;
-    z-index: 10;
-    pointer-events: none;
-    animation: slideIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  }
-
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translate(-20px, -50%);
-    }
-    to {
-      opacity: 1;
-      transform: translate(0, -50%);
-    }
-  }
-
   .globeLabelCtn {
     position: absolute;
     top: 0;
@@ -824,6 +1008,7 @@
     height: 100%;
     pointer-events: none;
     overflow: hidden;
+    z-index: 10;
   }
 
   .globeLabel {
@@ -838,40 +1023,194 @@
     z-index: 15;
   }
 
-  button.globeLabelBtn {
-    appearance: none ;
-    pointer-events: auto;
-    cursor: pointer;
-    background: rgba(18, 59, 101, 0.85);
+  .globeLabel.activeLabel {
+    z-index: 100;
+  }
+
+  .globeLabelBtn {
+    background: rgba(18, 59, 101, 0.9);
+    padding: 8px;
     color: #fff;
-    padding: 3px 6px;
     border-radius: 4px;
-    transition:
-      background 0.2s ease,
-      border-color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .countryLabel {
+    position: absolute;
+    font-size: 10px; 
+    font-weight: 100; 
+    color: rgba(0, 0, 0, 0);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  
+  .hkAnchorLabel {
+    color: #153b65;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  .yAxis :global(.tick text),
+  .xAxis :global(.tick text), .xAxis :global(.tick line), .yAxis :global(.tick line) {
+    fill: #e0e0e0;
+    stroke: #e0e0e0;
+    font-size: 10px;
+  }
+  .axis :global(path) {
+    stroke: #e0e0e0;
+  }
+
+  .highlightBox {
+    fill: rgba(255, 255, 255, 0.219);
+    stroke: rgba(255, 255, 255, 0.429);
+    stroke-dasharray: 1 2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .highlightBox:hover,
+  .highlightBox:focus, .highlightBox.activeHighlight{
+    fill: #ff4500;
+    stroke-width: 1.5;
+    stroke-dasharray: none;
+    outline: none;
+  }
+  .highlightText {
+    fill: #ffffff;
+    font-weight: 600;
+    font-size: 12px;
+    pointer-events: none;
+    transition: fill 0.3s;
+  }
+
+  .introBox {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 260px;
+    max-width: 90vw;
+    color: white;
+    border-radius: 6px;
+    z-index: 10;
+    background: rgba(18, 59, 101, 0.6); 
+    padding: 10px;
+    animation: slideIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+
+  .introHd{
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .relatedArticleHd{
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translate(-20px, -50%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, -50%);
+    }
   }
 
   .detailTooltip {
-    pointer-events: auto;
+    position: absolute;
     color: #ffffff;
-    background: rgba(18, 59, 101, 0.85);
-    padding: 8px 12px;
-    margin-top: 5px;
+    background: rgba(18, 59, 101, 0.95);
     border-radius: 4px;
-    min-width: 120px;
+    width: 260px;
+    max-width: 85vw; 
+    padding: 10px; 
+    z-index: 100;
+    transform-origin: top left; 
+  }
+
+  .shrinkArrowBtn {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    transition: color 0.2s ease, transform 0.2s ease;
+    z-index: 5;
+  }
+  .shrinkArrowBtn:hover {
+    color: white;
+  }
+
+  .tlpHd{
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .tlpMediaCtn {
+    position: relative;
+    margin-top: 12px;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+  .playBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #ffffff47;
+    color: #153b65;
+    border-radius: 50%;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .tlpMediaCtn img, .tlpMediaCtn video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .relatedArticle{
+    width: 100%;
+    margin: 3px 0;
+  }
+
+  .relatedArticle a{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .relatedArticle a span{
+    width: 90%;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+    display: inline-block;
   }
 
   .resetBtn {
     position: absolute;
+    padding: 0.5rem 1rem;
     top: 20px;
     right: 20px;
     z-index: 10;
-    background: #ff004d;
     color: white;
-    border: none;
-    padding: 8px 16px;
     border-radius: 4px;
-    font-weight: 600;
+    border: 1px solid #ffffff;
+    font-weight: 400;
     cursor: pointer;
     transition: background 0.2s;
   }
@@ -888,5 +1227,59 @@
   }
   .error {
     color: #ff4500;
+  }
+
+  .barTooltip {
+    position: fixed;
+    background: rgba(18, 59, 101, 0.85);
+    color: #fff;
+    padding: 5px;
+    border-radius: 6px;
+    pointer-events: none;
+    z-index: 20;
+    width: 80px;
+  }
+  .barHd {
+    font-weight: 300;
+    margin-bottom: 4px;
+  }
+
+  @media (max-width: 820px) {
+    .introBox, .detailTooltip {
+      width: 150px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      padding: 5px;
+      pointer-events: auto;
+    }
+
+    .scrollContent{
+            overflow-y: auto;
+      flex: 1;
+            height: 90px;
+      overflow-x: hidden;
+    }
+    
+    .introBox {
+      left: 10px;
+      top: 15%;
+      transform: none;
+    }
+    .introBox::after, .detailTooltip::after {
+      content: "";
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 15px;
+      background: linear-gradient(to bottom, rgba(18,59,101,0), rgba(18,59,101,0.95));
+      pointer-events: none; 
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   }
 </style>

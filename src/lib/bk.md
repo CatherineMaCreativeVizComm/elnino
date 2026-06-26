@@ -168,3 +168,41 @@
   ];
 
 
+
+
+
+const MONTH_NAMES = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+
+  const SEAS_MAPPING = {
+    DJF: { start_m: 12, end_m: 2, desc: "Winter" },
+    JFM: { start_m: 1, end_m: 3, desc: "Late Winter / Early Spring" },
+    FMA: { start_m: 2, end_m: 4, desc: "Early Spring" },
+    MAM: { start_m: 3, end_m: 5, desc: "Spring" },
+    AMJ: { start_m: 4, end_m: 6, desc: "Late Spring / Early Summer" },
+    MJJ: { start_m: 5, end_m: 7, desc: "Early Summer" },
+    JJA: { start_m: 6, end_m: 8, desc: "Summer" },
+    JAS: { start_m: 7, end_m: 9, desc: "Late Summer / Early Autumn" },
+    ASO: { start_m: 8, end_m: 10, desc: "Early Autumn" },
+    SON: { start_m: 9, end_m: 11, desc: "Autumn" },
+    OND: { start_m: 10, end_m: 12, desc: "Late Autumn / Early Winter" },
+    NDJ: { start_m: 11, end_m: 1, desc: "Early Winter" },
+  };
+
+  const monthToSeas = {
+    1: "DJF", 2: "JFM", 3: "FMA", 4: "MAM", 5: "AMJ", 6: "MJJ",
+    7: "JJA", 8: "JAS", 9: "ASO", 10: "SON", 11: "OND", 12: "NDJ"
+  };
+
+  const ENSO_MAPPING = {
+    VSE: { value: 4, desc: "Very Strong El Nino", color: "#FF004D" },
+    SE: { value: 3, desc: "Strong El Nino", color: "#FF4500" },
+    ME: { value: 2, desc: "Moderate El Nino", color: "#FFA500" },
+    WE: { value: 1, desc: "Weak El Nino", color: "#FFD700" },
+    N: { value: 0, desc: "Neutral", color: "#E0E0E0" },
+    WL: { value: -1, desc: "Weak La Nina", color: "#87CEFA" },
+    ML: { value: -2, desc: "Moderate La Nina", color: "#00BFFF" },
+    SL: { value: -3, desc: "Strong La Nina", color: "#9370DB" },
+  };

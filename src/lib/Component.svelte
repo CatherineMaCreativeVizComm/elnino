@@ -15,12 +15,20 @@
   const SHEET_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
   const GEOJSON_URL =
     "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson";
-  const EARTH_NORMAL_URL =
-    "https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_normal_2048.jpg";
 
   const MONTH_NAMES = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   const SEAS_MAPPING = {
@@ -39,12 +47,22 @@
   };
 
   const monthToSeas = {
-    1: "DJF", 2: "JFM", 3: "FMA", 4: "MAM", 5: "AMJ", 6: "MJJ",
-    7: "JJA", 8: "JAS", 9: "ASO", 10: "SON", 11: "OND", 12: "NDJ"
+    1: "DJF",
+    2: "JFM",
+    3: "FMA",
+    4: "MAM",
+    5: "AMJ",
+    6: "MJJ",
+    7: "JJA",
+    8: "JAS",
+    9: "ASO",
+    10: "SON",
+    11: "OND",
+    12: "NDJ",
   };
 
   const ENSO_MAPPING = {
-    VSE: { value: 4, desc: "Very Strong El Nino", color: "#FF004D" },
+    VSE: { value: 4, desc: "Very Strong El Nino", color: "#AA513B" },
     SE: { value: 3, desc: "Strong El Nino", color: "#FF4500" },
     ME: { value: 2, desc: "Moderate El Nino", color: "#FFA500" },
     WE: { value: 1, desc: "Weak El Nino", color: "#FFD700" },
@@ -69,19 +87,21 @@
   let isLoading = true;
   let errorMessage = "";
 
-  let width = 0, height = 0;
+  let width = 0,
+    height = 0;
   const margin = { top: 40, right: 15, bottom: 60, left: 20 };
-  
+
   $: innerWidth = Math.max(0, width - margin.left - margin.right);
   $: innerHeight = Math.max(0, height - margin.top - margin.bottom);
 
   let canvasElement;
   let dragZoneElement;
-  let globeWidth = 0, globeHeight = 0;
+  let globeWidth = 0,
+    globeHeight = 0;
   let renderer, scene, camera, controls;
   let tiltGroup, earthGroup, globeMesh;
   let poiGroup = new THREE.Group();
-  let labelGroup = new THREE.Group(); 
+  let labelGroup = new THREE.Group();
   let animationFrameId;
 
   let isFocusMode = false;
@@ -93,10 +113,12 @@
   let startCamPos = new THREE.Vector3();
   let endCamPos = new THREE.Vector3();
   const animationProgress = tweened(0, { duration: 1200, easing: cubicInOut });
+
   const poiGeometry = new THREE.SphereGeometry(0.01, 16, 16);
-  const poiMaterial = new THREE.MeshBasicMaterial({ color: 0xff004d });
-  
-  const HK_LAT_LON = { lat: 22.3193, lon: 114.1694 }; 
+  const greyMaterial = new THREE.MeshBasicMaterial({ color: 0xaaaaaa });
+  const redMaterial = new THREE.MeshBasicMaterial({ color: 0xaa513b });
+
+  const HK_LAT_LON = { lat: 22.3193, lon: 114.1694 };
 
   let hoveredBar = null;
   let mousePos = { x: 0, y: 0 };
@@ -104,8 +126,7 @@
   $: dragSize = Math.min(globeWidth, globeHeight) * 0.82;
 
   $: aspect = globeWidth > 0 && globeHeight > 0 ? globeWidth / globeHeight : 1;
-  $: targetBaseZ = aspect < 1 ? 2.8 / aspect : 2.8; 
-  $: targetFocusZ = aspect < 1 ? 1.8 / aspect : 2.5; 
+  $: targetBaseZ = aspect < 1 ? 2.8 / aspect : 2.8;
 
   $: xScale = d3
     .scaleBand()
@@ -178,18 +199,45 @@
       const x2 = xScale(endKey);
 
       if (x1 === undefined || x2 === undefined) return null;
-      
+
       return {
-        x: x1 + (x2 - x1) / 2 + xScale.bandwidth() / 2, 
+        x: x1 + (x2 - x1) / 2 + xScale.bandwidth() / 2,
         y: yScale(parseFloat(d.ANOM)),
       };
     })
     .filter(Boolean)
     .sort((a, b) => a.x - b.x);
 
-  $: roniPath = roniPoints.length > 0 
-    ? d3.line().x((d) => d.x).y((d) => d.y)(roniPoints) 
-    : null;
+  $: roniPath =
+    roniPoints.length > 0
+      ? d3
+          .line()
+          .x((d) => d.x)
+          .y((d) => d.y)(roniPoints)
+      : null;
+
+  $: updateMeshColors(isFocusMode, activePeriodId, flatPois);
+
+  function updateMeshColors(focus, periodId, pois) {
+    const isMobile = window.innerWidth < 820;
+
+    if (pois && pois.length > 0) {
+      pois.forEach((poi) => {
+        if (poi.mesh) {
+          const belongsToActivePeriod = focus && poi.events[periodId];
+          poi.mesh.material = belongsToActivePeriod
+            ? redMaterial
+            : greyMaterial;
+
+          if (focus && isMobile && !belongsToActivePeriod) {
+            poi.mesh.visible = false;
+          } else {
+            poi.mesh.visible = true;
+          }
+        }
+      });
+    }
+  }
 
   function latLongToVector3(lat, lon, radius) {
     const phi = (90 - lat) * (Math.PI / 180);
@@ -197,15 +245,71 @@
     return new THREE.Vector3(
       -(radius * Math.sin(phi) * Math.cos(theta)),
       radius * Math.cos(phi),
-      radius * Math.sin(phi) * Math.sin(theta)
+      radius * Math.sin(phi) * Math.sin(theta),
     );
+  }
+
+  function resolveOverlap(pois) {
+    const iterations = 50;
+    const minDist = 4.0;
+    for (let k = 0; k < iterations; k++) {
+      for (let i = 0; i < pois.length; i++) {
+        for (let j = i + 1; j < pois.length; j++) {
+          let dx = pois[i].lon - pois[j].lon;
+          let dy = pois[i].lat - pois[j].lat;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < minDist) {
+            if (dist === 0) {
+              dx = Math.random() - 0.5;
+              dy = Math.random() - 0.5;
+              dist = Math.sqrt(dx * dx + dy * dy);
+            }
+            const overlap = minDist - dist;
+            const pushX = (dx / dist) * (overlap / 2);
+            const pushY = (dy / dist) * (overlap / 2);
+
+            pois[i].lon += pushX;
+            pois[i].lat += pushY;
+            pois[j].lon -= pushX;
+            pois[j].lat -= pushY;
+          }
+        }
+      }
+    }
   }
 
   function calculateCenterOfPois(pois) {
     if (!pois || pois.length === 0) return { lat: 0, lon: 0 };
+    if (pois.length === 1)
+      return { lat: parseFloat(pois[0].lat), lon: parseFloat(pois[0].lon) };
+
+    let x = 0,
+      y = 0,
+      z = 0;
+    pois.forEach((p) => {
+      const lat = parseFloat(p.lat) * (Math.PI / 180);
+      const lon = parseFloat(p.lon) * (Math.PI / 180);
+      x += Math.cos(lat) * Math.cos(lon);
+      y += Math.cos(lat) * Math.sin(lon);
+      z += Math.sin(lat);
+    });
+
+    x /= pois.length;
+    y /= pois.length;
+    z /= pois.length;
+
+    if (Math.abs(x) < 1e-6 && Math.abs(y) < 1e-6 && Math.abs(z) < 1e-6) {
+      return { lat: 0, lon: 0 };
+    }
+
+    const centralLon = Math.atan2(y, x);
+    const centralSquareRoot = Math.sqrt(x * x + y * y);
+    const centralLat = Math.atan2(z, centralSquareRoot);
+
     return {
-      lat: pois.reduce((sum, p) => sum + parseFloat(p.lat), 0) / pois.length,
-      lon: pois.reduce((sum, p) => sum + parseFloat(p.lon), 0) / pois.length,
+      lat: centralLat * (180 / Math.PI),
+      lon: centralLon * (180 / Math.PI),
     };
   }
 
@@ -215,12 +319,12 @@
     canvas.height = 2048;
 
     const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#153b65"; 
+    ctx.fillStyle = "#153b65";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
+
     ctx.fillStyle = "#f0f4f8";
     ctx.strokeStyle = "#9ba4b5";
-    ctx.lineWidth = 1.0; 
+    ctx.lineWidth = 1.0;
 
     const projection = d3
       .geoEquirectangular()
@@ -234,13 +338,13 @@
       ctx.fill();
       ctx.stroke();
     });
-    
-    ctx.fillStyle = "#000"; 
+
+    ctx.fillStyle = "#000";
     const projectedHk = projection([HK_LAT_LON.lon, HK_LAT_LON.lat]);
     ctx.beginPath();
-    ctx.arc(projectedHk[0], projectedHk[1], 4, 0, 2 * Math.PI); 
+    ctx.arc(projectedHk[0], projectedHk[1], 4, 0, 2 * Math.PI);
     ctx.fill();
-    
+
     return new THREE.CanvasTexture(canvas);
   }
 
@@ -253,23 +357,26 @@
     scene.add(tiltGroup);
 
     earthGroup = new THREE.Group();
-    earthGroup.rotation.y = 2.2; 
+    earthGroup.rotation.y = 2.2;
     tiltGroup.add(earthGroup);
     earthGroup.add(poiGroup);
-    earthGroup.add(labelGroup); 
+    earthGroup.add(labelGroup);
 
     flatPois.forEach((poi) => {
-      const mesh = new THREE.Mesh(poiGeometry, poiMaterial);
+      const mesh = new THREE.Mesh(poiGeometry, greyMaterial);
       mesh.position.copy(latLongToVector3(poi.lat, poi.lon, 1.01));
       poiGroup.add(mesh);
       poi.mesh = mesh;
     });
-    
+
+    const sharedLabelGeo = new THREE.SphereGeometry(0.001, 4, 4);
+    const sharedLabelMat = new THREE.MeshBasicMaterial({
+      color: 0x000000,
+      visible: false,
+    });
+
     countryLabels.forEach((label) => {
-      const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(0.001, 6, 6), 
-        new THREE.MeshBasicMaterial({ color: 0x000000, visible: false }) 
-      );
+      const mesh = new THREE.Mesh(sharedLabelGeo, sharedLabelMat);
       mesh.position.copy(latLongToVector3(label.lat, label.lon, 1.01));
       labelGroup.add(mesh);
       label.mesh = mesh;
@@ -289,39 +396,48 @@
       alpha: true,
     });
     renderer.setSize(globeWidth, globeHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const isMobile = window.innerWidth < 820;
+    renderer.setPixelRatio(
+      isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5),
+    );
 
     controls = new OrbitControls(camera, dragZoneElement);
     controls.enablePan = false;
-    controls.enableZoom = false; 
+    controls.enableZoom = false;
     controls.minDistance = 1.5;
     controls.maxDistance = 10.0;
     controls.autoRotate = false;
+    controls.minAzimuthAngle = -Infinity;
+    controls.maxAzimuthAngle = Infinity;
+    controls.minPolarAngle = Math.PI * 0.25;
+    controls.maxPolarAngle = Math.PI * 0.75;
 
-    scene.add(new THREE.AmbientLight(0xffffff, 1.5));
-    camera.add(new THREE.DirectionalLight(0xffffff, 0.8));
-    scene.add(camera);
+    controls.addEventListener("start", () => {
+      if (flatPois.some((p) => p.showTooltip)) {
+        flatPois = flatPois.map((p) => ({ ...p, showTooltip: false }));
+      }
+    });
 
-    const textureLoader = new THREE.TextureLoader();
-    const normalMap = textureLoader.load(EARTH_NORMAL_URL);
     const mapTexture = createWorldTexture(geoJsonData);
+    mapTexture.generateMipmaps = true;
+    mapTexture.minFilter = THREE.LinearMipmapLinearFilter;
 
     globeMesh = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 64, 64),
-      new THREE.MeshStandardMaterial({
+      new THREE.SphereGeometry(1, 32, 32),
+      new THREE.MeshBasicMaterial({
         map: mapTexture,
-        normalMap: normalMap,
-        normalScale: new THREE.Vector2(1, 1), 
-        roughness: 1,
-        metalness: 0,
       }),
     );
     earthGroup.add(globeMesh);
 
+    let frameCount = 0;
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+      frameCount++;
+
       if (!isFocusMode && !isAnimatingCamera && !isHoveringLabel) {
-        earthGroup.rotation.y += 0.001;
+        earthGroup.rotation.y += 0.0004;
       }
 
       if (isAnimatingCamera) {
@@ -343,7 +459,10 @@
         controls.update();
       }
 
-      syncHtmlLabels();
+      if (frameCount % 3 === 0) {
+        syncHtmlLabels();
+      }
+
       renderer.render(scene, camera);
     };
     animate();
@@ -353,10 +472,19 @@
     if (!camera || !earthGroup) return;
     const camPosNorm = camera.position.clone().normalize();
     const meshWorldPos = new THREE.Vector3();
+    const isMobile = window.innerWidth < 820;
 
     flatPois.forEach((poi, i) => {
       const element = poiElements[i];
       if (!element || !poi.mesh) return;
+
+      const belongsToActivePeriod =
+        isFocusMode && activePeriodId && poi.events[activePeriodId];
+      if (isFocusMode && isMobile && !belongsToActivePeriod) {
+        element.style.display = "none";
+        return;
+      }
+
       poi.mesh.getWorldPosition(meshWorldPos);
 
       const dot = camPosNorm.dot(meshWorldPos.clone().normalize());
@@ -365,45 +493,48 @@
         const x = (vector.x * 0.5 + 0.5) * globeWidth;
         const y = (vector.y * -0.5 + 0.5) * globeHeight;
         element.style.display = "flex";
-        element.style.transform = `translate(${x + 10}px, ${y - 10}px)`;
+
+        const isRight = poi.align === "right";
+        element.style.transform = `translate3d(${x}px, ${y - 10}px, 0px) translateX(${isRight ? "10px" : "calc(-100% - 10px)"})`;
+
+        if (y > globeHeight - 200) {
+          element.classList.add("flipUp");
+        } else {
+          element.classList.remove("flipUp");
+        }
       } else {
         element.style.display = "none";
       }
     });
-    
+
     [...countryLabels].forEach((label, i) => {
       const element = countryLabelElements[i];
       if (!element || !label.mesh) return;
       label.mesh.getWorldPosition(meshWorldPos);
-      
+
       const dot = camPosNorm.dot(meshWorldPos.clone().normalize());
-      if (dot > 0.05) { 
+      if (dot > 0.05) {
         const vector = meshWorldPos.project(camera);
         const x = (vector.x * 0.5 + 0.5) * globeWidth;
         const y = (vector.y * -0.5 + 0.5) * globeHeight;
-        const xOffset = label.name === 'Hong Kong' ? 10 : 0;
-        const yOffset = label.name === 'Hong Kong' ? -10 : -8;
-        
-        element.style.display = "block"; 
-        element.style.transform = `translate(${x + xOffset}px, ${y + yOffset}px)`;
+        const xOffset = label.name === "Hong Kong" ? 10 : 0;
+        const yOffset = label.name === "Hong Kong" ? -10 : -8;
+        if (isFocusMode && isMobile) {
+          element.style.display = "none";
+        } else {
+          element.style.display = "block";
+          element.style.transform = `translate3d(${x + xOffset}px, ${y + yOffset}px, 0px)`;
+        }
       } else {
         element.style.display = "none";
       }
     });
   }
 
-  function handlePeriodClick(period) {
-    const centerLatLon = calculateCenterOfPois(period.pois);
-
-    isFocusMode = true;
-    activePeriodId = period.id;
+  function moveCameraTo(lat, lon) {
     startCamPos.copy(camera.position);
 
-    const localTarget = latLongToVector3(
-      centerLatLon.lat,
-      centerLatLon.lon,
-      targetFocusZ
-    );
+    const localTarget = latLongToVector3(lat, lon, targetBaseZ);
 
     earthGroup.updateMatrixWorld();
     const worldTarget = localTarget.applyMatrix4(earthGroup.matrixWorld);
@@ -416,20 +547,30 @@
     });
   }
 
+  function handlePeriodClick(period) {
+    const centerLatLon = calculateCenterOfPois(period.pois);
+    isFocusMode = true;
+    activePeriodId = period.id;
+    moveCameraTo(centerLatLon.lat, centerLatLon.lon);
+  }
+
   function handleLabelClick(poi) {
-    if (poi.media_type === 'hk_anchor') return; 
-    if (activePeriodId !== poi.periodId) {
-      const targetPeriod = highlightPeriods.find((p) => p.id === poi.periodId);
-      if (targetPeriod) {
-        handlePeriodClick(targetPeriod);
-        flatPois = flatPois.map((p) => ({
-          ...p,
-          showTooltip: p.id === poi.id,
-        }));
-      }
-    } else {
-      toggleTooltip(poi.id);
+    if (poi.events["hk_anchor"]) return;
+    const targetPeriodId =
+      isFocusMode && activePeriodId && poi.events[activePeriodId]
+        ? activePeriodId
+        : Object.keys(poi.events)[0];
+
+    if (targetPeriodId !== activePeriodId) {
+      isFocusMode = true;
+      activePeriodId = targetPeriodId;
     }
+    moveCameraTo(poi.lat, poi.lon);
+
+    flatPois = flatPois.map((p) => ({
+      ...p,
+      showTooltip: p.id === poi.id,
+    }));
   }
 
   function resumeRotation() {
@@ -448,7 +589,9 @@
 
   function toggleTooltip(poiId) {
     flatPois = flatPois.map((p) =>
-      p.id === poiId ? { ...p, showTooltip: !p.showTooltip } : p,
+      p.id === poiId
+        ? { ...p, showTooltip: !p.showTooltip }
+        : { ...p, showTooltip: false },
     );
   }
 
@@ -477,11 +620,11 @@
   }
 
   function handleBarHover(event, d) {
-    if (window.innerWidth < 820) return; 
+    if (window.innerWidth < 820) return;
     hoveredBar = d;
     mousePos = { x: event.clientX, y: event.clientY };
   }
-  
+
   function handleBarLeave() {
     hoveredBar = null;
   }
@@ -490,7 +633,7 @@
     camera.aspect = globeWidth / globeHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(globeWidth, globeHeight);
-    
+
     if (!isFocusMode && !isAnimatingCamera) {
       camera.position.setLength(targetBaseZ);
     }
@@ -499,8 +642,7 @@
   onMount(async () => {
     try {
       const isDev =
-        import.meta.env?.DEV ||
-        window.location.hostname === "localhost";
+        import.meta.env?.DEV || window.location.hostname === "localhost";
 
       let targetUrl = jsonUrl;
       if (jsonUrl) {
@@ -530,9 +672,9 @@
       const parsedData = parseSheetData(sheetJson);
       monthlyAnm = parsedData.anmData;
       roniData = parsedData.roni;
-      
+
       const parsedCountries = (geoJsonData.features || [])
-        .map(feature => {
+        .map((feature) => {
           const name = feature.properties.name || feature.properties.ADMIN;
           if (name === "Taiwan" || !name) return null;
           if (name === "Hong Kong") return null;
@@ -540,40 +682,56 @@
           return { name, lat: centroid[1], lon: centroid[0], mesh: null };
         })
         .filter(Boolean);
-        
-      const hkAnchor = {
-          id: `hk_anchor`,
-          media_type: 'hk_anchor',
-          location: 'Hong Kong',
-          lat: HK_LAT_LON.lat,
-          lon: HK_LAT_LON.lon,
-          name: 'Hong Kong',
-          mesh: null
-      };
-      
-      countryLabels = [...parsedCountries, hkAnchor];
 
+      const hkAnchor = {
+        id: `hk_anchor`,
+        media_type: "hk_anchor",
+        location: "Hong Kong",
+        lat: HK_LAT_LON.lat,
+        lon: HK_LAT_LON.lon,
+        name: "Hong Kong",
+        mesh: null,
+      };
+
+      countryLabels = [...parsedCountries, hkAnchor];
       highlightPeriods = fetchedHighlights;
-      flatPois = highlightPeriods.flatMap((period) =>
-        (period.pois || []).map((poi, i) => ({
-          id: `${period.id}-${i}`,
-          periodId: period.id,
-          lat: parseFloat(poi.lat),
-          lon: parseFloat(poi.lon),
-          location: poi.location || "Point",
-          periodLabel: period.label || "",
-          media_type: poi.media_type || "",
-          media_url: poi.media_url || "",
-          caption_hd: poi.caption_hd || "",
-          caption_body: poi.caption_body || "",
-          scmp_article: (poi.scmp_article || []).map((article) => ({
-            story_hd: article.story_hd || "",
-            story_link: article.story_link || "",
-          })),
-          showTooltip: false,
-          mesh: null,
-        }))
-      );
+
+      const locationMap = new Map();
+      highlightPeriods.forEach((period) => {
+        (period.pois || []).forEach((poi) => {
+          const loc = poi.location || "Point";
+          if (!locationMap.has(loc)) {
+            locationMap.set(loc, {
+              id: `poi-${locationMap.size}`,
+              location: loc,
+              lat: parseFloat(poi.lat),
+              lon: parseFloat(poi.lon),
+              events: {},
+              showTooltip: false,
+              mesh: null,
+            });
+          }
+          const locData = locationMap.get(loc);
+          locData.events[period.id] = {
+            periodId: period.id,
+            periodLabel: period.label || "",
+            media_type: poi.media_type || "",
+            media_url: poi.media_url || "",
+            caption_hd: poi.caption_hd || "",
+            caption_body: poi.caption_body || "",
+            scmp_article: (poi.scmp_article || []).map((article) => ({
+              story_hd: article.story_hd || "",
+              story_link: article.story_link || "",
+            })),
+          };
+        });
+      });
+
+      flatPois = Array.from(locationMap.values()).map((p, index) => ({
+        ...p,
+        align: index % 2 === 0 ? "right" : "left",
+      }));
+      resolveOverlap(flatPois);
 
       isLoading = false;
       setTimeout(() => initThree(geoJsonData), 50);
@@ -593,11 +751,12 @@
       const axis = d3.axisLeft(s).tickSize(-w);
       d3.select(node)
         .call(axis)
-        .call((g) => g.select(".domain").remove()) 
+        .call((g) => g.select(".domain").remove())
         .call((g) =>
-          g.selectAll(".tick line")
-            .attr("stroke-dasharray", "1,2") 
-            .attr("stroke", "rgba(255, 255, 255, 0.1)")
+          g
+            .selectAll(".tick line")
+            .attr("stroke-dasharray", "1,2")
+            .attr("stroke", "rgba(255, 255, 255, 0.1)"),
         );
     };
     draw(scale, width);
@@ -611,8 +770,8 @@
   function xAxis(node, { scale, data, screenW }) {
     function draw(s, d, w) {
       const currentYear = new Date().getFullYear();
-      const step = w < 820 ? 10 : 5; 
-  
+      const step = w < 820 ? 10 : 5;
+
       let targetYears = [];
       for (let y = 1955; y <= 2025; y += step) {
         targetYears.push(y);
@@ -622,23 +781,21 @@
       }
 
       const tickValues = d
-        .filter((item) => item.month === 1 && targetYears.includes(parseInt(item.yr_ssta, 10)))
+        .filter(
+          (item) =>
+            item.month === 1 &&
+            targetYears.includes(parseInt(item.yr_ssta, 10)),
+        )
         .map((item) => item.key);
-        
+
       const axis = d3
         .axisBottom(s)
         .tickValues(tickValues)
         .tickFormat((val) => val.split("-")[0]);
-      
+
       const axisGroup = d3.select(node).call(axis);
-
-      axisGroup.selectAll(".tick line")
-        .attr("y1", -5)
-        .attr("y2", 5);
-
-      axisGroup.selectAll("text")
-        .attr("y", -15) 
-        .style("text-anchor", "middle");
+      axisGroup.selectAll(".tick line").attr("y1", -5).attr("y2", 5);
+      axisGroup.selectAll("text").attr("y", -15).style("text-anchor", "middle");
     }
     draw(scale, data, screenW);
     return {
@@ -678,7 +835,11 @@
                 <div class="relatedArticleHd">Related Articles</div>
                 {#each activePeriod.scmp_article as article}
                   <div class="relatedArticle">
-                    <a href={article.story_link} target="_blank" rel="noreferrer">
+                    <a
+                      href={article.story_link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <span>{article.story_hd}</span> &#10145
                     </a>
                   </div>
@@ -697,98 +858,125 @@
         {#each flatPois as poi, i}
           <div
             bind:this={poiElements[i]}
-            class="globeLabel"
+            class="globeLabel {poi.align === 'left' ? 'alignLeft' : ''}"
             class:activeLabel={poi.showTooltip}
             style="display: none;"
           >
-            <button
-              class="globeLabelBtn"
-              on:click={() => handleLabelClick(poi)}
-              on:mouseenter={() => (isHoveringLabel = true)}
-              on:mouseleave={() => (isHoveringLabel = false)}
-            >
-              {poi.location}
-            </button>
+            {#if !poi.showTooltip}
+              <button
+                class="globeLabelBtn"
+                on:click={() => handleLabelClick(poi)}
+                on:mouseenter={() => (isHoveringLabel = true)}
+                on:mouseleave={() => (isHoveringLabel = false)}
+              >
+                {poi.location}
+              </button>
+            {:else}
+              {@const activeEvent =
+                isFocusMode && poi.events[activePeriodId]
+                  ? poi.events[activePeriodId]
+                  : Object.values(poi.events)[0]}
 
-            {#if poi.showTooltip}
-              <div class="detailTooltip" transition:scale={{ duration: 350, start: 0.1, opacity: 0 }}>
-                <button 
-                  class="shrinkArrowBtn" 
+              <div
+                class="detailTooltip"
+                transition:scale={{ duration: 350, start: 0.1, opacity: 0 }}
+              >
+                <button
+                  class="shrinkArrowBtn"
                   on:click|stopPropagation={() => toggleTooltip(poi.id)}
                   aria-label="Close details"
                 >
                   &#10005;
                 </button>
-                
+
                 <div class="scrollContent">
-                  <div>
-                  <div class="tlpHd">{poi.caption_hd}</div>
-                  <div class="tlpbody">{poi.caption_body}</div>
-                  
-                  {#if poi.media_url !== ""}
+                  {#if activeEvent.media_url !== ""}
                     <div class="tlpMediaCtn">
-                      {#if poi.media_type === "image"}
-                        <img src={poi.media_url} alt={poi.caption_hd} />
+                      {#if activeEvent.media_type === "image"}
+                        <img
+                          src={activeEvent.media_url}
+                          alt={activeEvent.caption_hd}
+                        />
                       {:else}
-                        <video bind:this={poi.videoRef} src={poi.media_url} playsinline muted loop></video>
-                        <button class="playBtn" on:click={() => {
-                          const v = poi.videoRef;
-                          v.paused ? v.play() : v.pause();
-                          poi = poi;
-                        }}>{poi.videoRef?.paused ? "▶" : "⏸"}</button>
+                        <video
+                          bind:this={poi.videoRef}
+                          src={activeEvent.media_url}
+                          playsinline
+                          muted
+                          loop
+                        ></video>
+                        <button
+                          class="playBtn"
+                          on:click={() => {
+                            const v = poi.videoRef;
+                            v.paused ? v.play() : v.pause();
+                            flatPois = flatPois;
+                          }}>{poi.videoRef?.paused ? "▶" : "⏸"}</button
+                        >
                       {/if}
                     </div>
                   {/if}
-
-                  {#if poi.scmp_article !== ""}
-                    <div class="relatedArticleCtn">
-                      <div class="relatedArticleHd">Related Articles</div>
-                      {#each poi.scmp_article as article}
-                        <div class="relatedArticle">
-                          <a href={article.story_link} target="_blank" rel="noreferrer">
-                            <span>{article.story_hd}</span>&#10145
-                          </a>
-                        </div>
-                      {/each}
+                  <div>
+                    <div class="tlpHd">
+                      {activeEvent.caption_hd
+                        ? activeEvent.caption_hd
+                        : poi.location}
                     </div>
-                  {/if}
+                    <div class="tlpbody">{activeEvent.caption_body}</div>
+
+                    {#if activeEvent.scmp_article && activeEvent.scmp_article.length > 0 && activeEvent.scmp_article[0].story_link !== ""}
+                      <div class="relatedArticleCtn">
+                        <div class="relatedArticleHd">Related Articles</div>
+                        {#each activeEvent.scmp_article as article}
+                          {#if article.story_link !== ""}
+                            <div class="relatedArticle">
+                              <a
+                                href={article.story_link}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <span>{article.story_hd}</span>&#10145
+                              </a>
+                            </div>
+                          {/if}
+                        {/each}
+                      </div>
+                    {/if}
                   </div>
                 </div>
               </div>
             {/if}
           </div>
         {/each}
-        
-        <div>
-        {#each countryLabels as label, i}
-          <div
-            bind:this={countryLabelElements[i]}
-            class="countryLabel"
-            class:hkAnchorLabel={label.name === 'Hong Kong'}
-            style="display: none;"
-          >
-            {label.name}
-          </div>
-        {/each}
-        </div>
+
+        <!-- <div>
+          {#each countryLabels as label, i}
+            <div
+              bind:this={countryLabelElements[i]}
+              class="countryLabel"
+              class:hkAnchorLabel={label.name === "Hong Kong"}
+              style="display: none;"
+            >
+              {label.name}
+            </div>
+          {/each}
+        </div> -->
       </div>
     </div>
 
-    <div class="chartCtn" bind:clientWidth={width} bind:clientHeight={height} style="position: relative;">
+    <div
+      class="chartCtn"
+      bind:clientWidth={width}
+      bind:clientHeight={height}
+      style="position: relative;"
+    >
       {#if width > 0 && height > 0 && chartData.length > 0}
-        
         <div class="htmlRefCtn">
-          {#each [
-            { val: 0.5, label: "weak" },
-            { val: 1.0, label: "moderate" },
-            { val: 1.5, label: "strong" },
-            { val: 2.0, label: "very strong" },
-            { val: -0.5, label: "weak" },
-            { val: -1.0, label: "moderate" },
-            { val: -1.5, label: "strong" },
-            { val: -2.0, label: "very strong" }
-          ] as ref}
-            <div class="refHtmlLabel" style="top: {margin.top + yScale(ref.val)}px;">
+          {#each [{ val: 0.5, label: "weak" }, { val: 1.0, label: "moderate" }, { val: 1.5, label: "strong" }, { val: 2.0, label: "very strong" }, { val: -0.5, label: "weak" }, { val: -1.0, label: "moderate" }, { val: -1.5, label: "strong" }, { val: -2.0, label: "very strong" }] as ref}
+            <div
+              class="refHtmlLabel"
+              style="top: {margin.top + yScale(ref.val)}px;"
+            >
               {ref.label}
             </div>
           {/each}
@@ -804,7 +992,9 @@
                   x={box.x}
                   y={box.event_type === "El Nino" ? -20 : yScale(0)}
                   width={box.width}
-                  height={box.event_type === "El Nino" ? yScale(0) + 20 : innerHeight - yScale(0) + 20}
+                  height={box.event_type === "El Nino"
+                    ? yScale(0) + 20
+                    : innerHeight - yScale(0) + 20}
                   role="button"
                   tabindex="0"
                   on:click={() => handlePeriodClick(box)}
@@ -820,14 +1010,18 @@
                   y={box.event_type === "El Nino" ? -28 : innerHeight + 35}
                   class="highlightText"
                   class:activeTxt={activePeriodId === box.id}
-                  text-anchor="middle">
+                  text-anchor="middle"
+                >
                   {box.label}
                 </text>
               {/each}
             </g>
 
             <g class="axisCtn">
-              <g class="axis yAxis" use:yAxis={{ scale: yScale, width: innerWidth }}></g>
+              <g
+                class="axis yAxis"
+                use:yAxis={{ scale: yScale, width: innerWidth }}
+              ></g>
               <g
                 class="axis xAxis"
                 transform={`translate(0, ${innerHeight})`}
@@ -895,14 +1089,14 @@
         style="left: {mousePos.x + 15}px; top: {mousePos.y + 15}px;"
       >
         <div class="barHd">
-          {MONTH_NAMES[hoveredBar.month - 1]} {hoveredBar.yr_ssta}
+          {MONTH_NAMES[hoveredBar.month - 1]}
+          {hoveredBar.yr_ssta}
         </div>
         <div class="barBd">
-          {ENSO_MAPPING[hoveredBar.ENSO]?.desc || 'Neutral'}
+          {ENSO_MAPPING[hoveredBar.ENSO]?.desc || "Neutral"}
         </div>
       </div>
     {/if}
-
   {/if}
 </section>
 
@@ -925,7 +1119,8 @@
     font-size: 12px;
   }
 
-  a, button {
+  a,
+  button {
     background: none;
     color: inherit;
     border: none;
@@ -962,7 +1157,7 @@
   .htmlRefCtn {
     position: absolute;
     top: 0;
-    left: 20px; 
+    left: 20px;
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -1023,35 +1218,47 @@
     z-index: 15;
   }
 
+  .globeLabel.alignLeft {
+    align-items: flex-end;
+  }
+
+  .globeLabel.alignLeft .detailTooltip {
+    transform-origin: top right;
+  }
+
   .globeLabel.activeLabel {
     z-index: 100;
   }
 
   .globeLabelBtn {
     background: rgba(18, 59, 101, 0.9);
-    padding: 8px;
+    padding: 3px;
     color: #fff;
     border-radius: 4px;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
   }
-  
-  .countryLabel {
+
+  /* .countryLabel {
     position: absolute;
-    font-size: 10px; 
-    font-weight: 100; 
+    font-size: 10px;
+    font-weight: 100;
     color: rgba(0, 0, 0, 0);
     white-space: nowrap;
     pointer-events: none;
   }
-  
+
   .hkAnchorLabel {
     color: #153b65;
     font-weight: 600;
     font-size: 12px;
-  }
+  } */
 
   .yAxis :global(.tick text),
-  .xAxis :global(.tick text), .xAxis :global(.tick line), .yAxis :global(.tick line) {
+  .xAxis :global(.tick text),
+  .xAxis :global(.tick line),
+  .yAxis :global(.tick line) {
     fill: #e0e0e0;
     stroke: #e0e0e0;
     font-size: 10px;
@@ -1068,7 +1275,8 @@
     transition: all 0.3s ease;
   }
   .highlightBox:hover,
-  .highlightBox:focus, .highlightBox.activeHighlight{
+  .highlightBox:focus,
+  .highlightBox.activeHighlight {
     fill: #ff4500;
     stroke-width: 1.5;
     stroke-dasharray: none;
@@ -1092,18 +1300,18 @@
     color: white;
     border-radius: 6px;
     z-index: 10;
-    background: rgba(18, 59, 101, 0.6); 
+    background: rgba(18, 59, 101, 0.6);
     padding: 10px;
     animation: slideIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   }
 
-  .introHd{
+  .introHd {
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 4px;
   }
 
-  .relatedArticleHd{
+  .relatedArticleHd {
     font-weight: 600;
     margin-bottom: 4px;
     margin-top: 12px;
@@ -1122,14 +1330,15 @@
 
   .detailTooltip {
     position: absolute;
+    top: 0;
     color: #ffffff;
     background: rgba(18, 59, 101, 0.95);
     border-radius: 4px;
     width: 260px;
-    max-width: 85vw; 
-    padding: 10px; 
+    max-width: 85vw;
+    padding: 10px;
     z-index: 100;
-    transform-origin: top left; 
+    transform-origin: top left;
   }
 
   .shrinkArrowBtn {
@@ -1138,14 +1347,16 @@
     right: 8px;
     color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
     z-index: 5;
   }
   .shrinkArrowBtn:hover {
     color: white;
   }
 
-  .tlpHd{
+  .tlpHd {
     font-weight: 600;
     margin-bottom: 4px;
   }
@@ -1157,7 +1368,9 @@
     overflow: hidden;
     width: 100%;
     aspect-ratio: 16/9;
+    object-fit: cover;
   }
+
   .playBtn {
     position: absolute;
     top: 50%;
@@ -1173,19 +1386,20 @@
     cursor: pointer;
   }
 
-  .tlpMediaCtn img, .tlpMediaCtn video {
+  .tlpMediaCtn img,
+  .tlpMediaCtn video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
   }
 
-  .relatedArticle{
+  .relatedArticle {
     width: 100%;
     margin: 3px 0;
   }
 
-  .relatedArticle a{
+  .relatedArticle a {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -1193,7 +1407,7 @@
     justify-content: space-between;
     align-items: center;
   }
-  .relatedArticle a span{
+  .relatedArticle a span {
     width: 90%;
     text-overflow: ellipsis;
     text-wrap: nowrap;
@@ -1245,7 +1459,8 @@
   }
 
   @media (max-width: 820px) {
-    .introBox, .detailTooltip {
+    .introBox,
+    .detailTooltip {
       width: 150px;
       height: 100px;
       display: flex;
@@ -1254,32 +1469,43 @@
       pointer-events: auto;
     }
 
-    .scrollContent{
-            overflow-y: auto;
+    .scrollContent {
+      overflow-y: auto;
       flex: 1;
-            height: 90px;
+      height: 90px;
       overflow-x: hidden;
     }
-    
+
     .introBox {
       left: 10px;
       top: 15%;
       transform: none;
     }
-    .introBox::after, .detailTooltip::after {
+    .introBox::after,
+    .detailTooltip::after {
       content: "";
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
       height: 15px;
-      background: linear-gradient(to bottom, rgba(18,59,101,0), rgba(18,59,101,0.95));
-      pointer-events: none; 
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 59, 101, 0),
+        rgba(18, 59, 101, 0.95)
+      );
+      pointer-events: none;
     }
 
     @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 </style>

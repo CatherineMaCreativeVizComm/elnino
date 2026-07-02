@@ -1,174 +1,876 @@
 [
   {
     "id": "evt1",
-    "label": "xxxxx El Nino",
+    "label": "1982–1983 El Niño",
     "event_type": "El Nino",
-    "start": "1997, 5",
-    "end": "1998, 9",
+    "start": "1982, 4",
+    "end": "1983, 6",
     "pois": [
       {
-        "location": "xxxxxx",
-        "lat": "0",
-        "lon": "-150",
+        "location": "Texas, United States",
+        "lat": "29.753260866327253",
+        "lon": "-95.34900026122546",
         "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article": ""
-      },{
-        "location": "xxxxxx",
-        "lat": "2",
-        "lon": "-120",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt1_1.jpg",
+        "caption_hd": "",
+        "caption_body": "An altered jet stream drove relentless storm tracks across the southern U.S., triggering widespread and extreme flooding. The region faced significant inundation from heavy rainfall. Furthermore, Hurricane Alicia struck the Texas coast in August 1983 as a Category 3 storm, inflicting massive destruction and coastal erosion that resulted in $3 billion in total damages.",
+        "scmp_article": []
+      },
+      {
+        "location": "Victoria, Australia",
+        "lat": "-37.813629",
+        "lon": " 144.963058",
         "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article":""
-      },{
-        "location": "xxxxxx",
-        "lat": "-2",
-        "lon": "-90",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt1_2.jpg",
+        "caption_hd": "Ash Wednesday blaze",
+        "caption_body": "The atmospheric shift triggered a devastating, continent-wide drought. Acute water shortages fueled extreme dust storms and the catastrophic 'Ash Wednesday' bushfires in February 1983, which killed 75 people across southeastern Australia. Widespread livestock and crop losses devastated agricultural output and local economies.",
+        "scmp_article": []
+      },
+      {
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
         "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article":[
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt1_3.jpg",
+        "caption_hd": "",
+        "caption_body": "On September 9, 1983, the historic, devastating Typhoon Ellen made landfall, prompting the Royal Observatory (now Hong Kong Observatory) to hoist the No. 10 Hurricane Signal. Hurricane-force winds reached over 200km/h, bringing widespread chaos, mudslides, power blackouts, and at least two deaths. Widespread marine incidents occurred as 24 ships were driven aground in and around Hong Kong waters.",
+        "scmp_article": [
           {
-            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "story_link": "https://www.scmp.com/xxxxxxxx"
+            "story_hd": "In the eye of the storm: Typhoons in Hong Kong",
+            "story_link": "https://multimedia.scmp.com/typhoons/"
+          },
+          {
+            "story_hd": "Slice of Life",
+            "story_link": "https://www.scmp.com/article/652025/slice-life"
           }
         ]
+      },
+      {
+        "location": "Shandong, China",
+        "lat": "36.651216",
+        "lon": "117.120098",
+        "media_type": "",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "The Yellow River basin experienced drastic rainfall deficits. Surrounding Jinan, extreme dry conditions severely depleted soil moisture and local reservoirs, devastating regional summer wheat and corn yields. This widespread agricultural failure inflicted heavy economic losses on millions of rural farmers.",
+        "scmp_article": [
+          {
+            "story_hd": "In the eye of the storm: Typhoons in Hong Kong",
+            "story_link": "https://multimedia.scmp.com/typhoons/"
+          },
+          {
+            "story_hd": "Slice of Life",
+            "story_link": "https://www.scmp.com/article/652025/slice-life"
+          }
+        ]
+      },
+      {
+        "location": "Northern Coast, Peru",
+        "lat": "-5.189233",
+        "lon": "-80.625122",
+        "media_type": "",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "Torrential flooding devastated this normally arid region, which received 11 feet of rain—a massive increase over the 6-inch norm. Floods destroyed infrastructure and triggered deadly disease outbreaks. Marine ecosystems were crushed when sea surface temperatures surged by 7.2°F in just 24 hours, leading to the collapse of the lucrative anchoveta fishery.",
+        "scmp_article": []
+      },
+      {
+        "location": "Hawaii, United States",
+        "lat": "22.096439",
+        "lon": " -159.526123",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt1_4.jpg",
+        "caption_hd": "",
+        "caption_body": "Warmer waters altered Pacific storm tracks, spawning Hurricane Iwa in November 1982. The cyclone caused $312 million in property and agricultural damage, leaving 94% of electrical users on nearby Oahu without power. The storm also directly resulted in the extinction of the Kauaʻi ʻōʻō bird.",
+        "scmp_article": []
+      },
+      {
+        "location": "Java, Indonesia",
+        "lat": "-7.614529",
+        "lon": "110.712246",
+        "media_type": "",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "Cooler waters in the western Pacific suppressed convection, triggering one of the most severe droughts in Indonesia's history. The lack of monsoon rainfall decimated crop yields and livestock, causing widespread famine and food insecurity. Economic damages from agricultural failure easily surpassed $100 million.",
+        "scmp_article": []
+      },
+      {
+        "location": "California, United States",
+        "lat": "35.125801",
+        "lon": "-120.659615",
+        "media_type": "",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "A southward drop in the jet stream drove a relentless series of severe winter storms into California. Catastrophic flooding, coastal erosion, and high winds caused 14 fatalities and roughly $265 million in damages. Furthermore, the anomalous oceanic warming severely stunted the growth and fecundity of the northern anchovy stock.",
+        "scmp_article": []
       }
     ],
-    "event_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "scmp_article":[
-      {
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
-      },{
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
-      },{
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
-      }
-    ]
-  },{
+    "event_desc": "One of the strongest ocean-atmosphere warming events in recorded history. Anomalously warm sea surface temperatures and reversed trade winds caused severe disruptions to global weather patterns and marine ecosystems. It triggered catastrophic flooding and extreme rainfall in the Americas, particularly Peru, Ecuador, and the U.S. Conversely, it induced severe droughts in Australia, Indonesia, and Africa. The global economic toll exceeded $8 billion, resulting in widespread infrastructure damage, collapsed fisheries, and thousands of fatalities due to floods, extreme fires, and disease outbreaks.",
+    "scmp_article": []
+  },
+  {
     "id": "evt2",
-    "label": "xxxxx La Nina",
-    "event_type": "La Nina",
-    "start": "2005, 8",
-    "end": "2006, 9",
+    "label": "1991–1992 El Niño",
+    "event_type": "El Nino",
+    "start": "1991, 4",
+    "end": "1992, 8",
     "pois": [
       {
-        "location": "xxxxxx",
-        "lat": "20",
-        "lon": "-130",
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
         "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article":[
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt2_1.jpg",
+        "caption_hd": "",
+        "caption_body": "On May 8, 1992, torrential storms struck the territory, recording an unprecedented 110 mm of precipitation in a single hour—the highest hourly rate since records began in 1884. This intense deluge rapidly overwhelmed local drainage systems, triggering widespread urban flash flooding and multiple severe landslides across steep terrain, which heavily disrupted infrastructure and transportation.",
+        "scmp_article": [
           {
-            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "story_link": "https://www.scmp.com/xxxxxxxx"
+            "story_hd": "In the eye of the storm: Typhoons in Hong Kong",
+            "story_link": "https://multimedia.scmp.com/typhoons/"
           }
         ]
-      },{
-        "location": "xxxxxx",
-        "lat": "-9",
-        "lon": "-150",
-        "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article":[]
-      },{
-        "location": "xxxxxx",
-        "lat": "-26",
-        "lon": "-92",
-        "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article":[
+      },
+      {
+        "location": "Henan, China",
+        "lat": "36.651216",
+        "lon": "117.120098",
+        "media_type": "",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "The Yellow River basin experienced drastic rainfall deficits. Surrounding Jinan, extreme dry conditions severely depleted soil moisture and local reservoirs, devastating regional summer wheat and corn yields. This widespread agricultural failure inflicted heavy economic losses on millions of rural farmers.",
+        "scmp_article": [
           {
-            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "story_link": "https://www.scmp.com/xxxxxxxx"
+            "story_hd": "Slice of Life",
+            "story_link": "https://www.scmp.com/article/652025/slice-life"
           }
         ]
+      },
+      {
+        "location": "Harare, Zimbabwe",
+        "lat": "-17.821629",
+        "lon": "31.049226",
+        "media_type": "",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "Triggered the worst drought in a century across Southern Africa, ravaging agriculture. 2.4 million people (26% of the population) faced acute food insecurity as cattle died and crops failed. The regional drought affected 86 million people, necessitating the import of 11.6 million tonnes of relief food to avert massive famine.",
+        "scmp_article": []
+      },
+      {
+        "location": "Hawaii, United States",
+        "lat": "22.096439",
+        "lon": "-159.526123",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt2_4.jpg",
+        "caption_hd": "",
+        "caption_body": "Warmer Pacific waters fueled Hurricane Iniki in September 1992. Striking Kauaʻi with 145 mph sustained winds, it became the most destructive hurricane in Hawaiian history. The storm destroyed approximately 1,400 homes, severely damaged 5,000 more, and caused $1.8 billion in property damage, leaving 70% of the island's infrastructure ruined and three people dead."
+      },
+      {
+        "location": "Queensland, Australia",
+        "lat": "-27.469770",
+        "lon": "153.025123",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt2_2.jpg",
+        "caption_hd": "",
+        "caption_body": "Severe rainfall deficiencies started in March 1991, triggering a devastating multi-year drought across eastern Australia. By late 1991, a massive portion of Queensland was officially drought-declared. The relentless dry conditions decimated crops and livestock herds, ultimately costing the Australian economy roughly A$5 billion in lost rural agricultural production.",
+        "scmp_article": []
+      },
+      {
+        "location": "Baidoa, Somalia",
+        "lat": "3.118991",
+        "lon": "43.647502",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt2_3.jpg",
+        "caption_hd": "",
+        "caption_body": "A severe drought, linked to the broader 1991–1992 El Niño climate shift, combined with civil war to trigger a catastrophic famine. The drought decimated agriculture in the typically fertile Jubba and Shebelle valleys. As armed factions plundered remaining grain, an estimated 200,000 to 300,000 Somalis died of starvation. Baidoa became the famine's epicenter, dubbed the 'City of Death,' where approximately 30,000 internally displaced people perished in September 1992 alone.",
+        "scmp_article": []
       }
     ],
-    "event_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "scmp_article":[
+    "event_desc": "A moderate-to-strong ocean-atmosphere phenomenon that significantly altered global weather patterns. While milder than the 1982–1983 event, it caused profound agricultural and economic disruption. It triggered the worst drought in a century across Southern Africa, leaving millions food insecure. Meanwhile, heavy rains struck the normally arid coastal plains of Ecuador. The altered jet stream brought heavy rainfall and sudden flash flooding to California. It also spawned catastrophic storms in the central Pacific, while causing severe drought and massive agricultural fires across Indonesia.",
+    "scmp_article": [
       {
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
-      },{
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
-      },{
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
+        "story_hd": "Landslip warning as El Nino returns",
+        "story_link": "https://www.scmp.com/article/105721/landslip-warning-el-nino-returns"
       }
     ]
-  }, {
+  },
+  {
     "id": "evt3",
-    "label": "xxxxx La Nina",
-    "event_type": "La Nina",
-    "start": "1975, 2",
-    "end": "1977, 3",
+    "label": "1997-1998 El Nino",
+    "event_type": "El Nino",
+    "start": "1997, 4",
+    "end": "1998, 5",
     "pois": [
       {
-        "location": "xxxxxx",
-        "lat": "-35",
-        "lon": "-128",
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
+        "media_type": "",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "The climate shift made 1997 Hong Kong's wettest year on record, bringing 3,343 mm of rainfall—51% above normal. This caused severe landslides and urban flooding. Additionally, altered ocean currents and temperatures triggered massive red tides (harmful algal blooms) in early 1998, wiping out thousands of tonnes of cultured fish and costing the local aquaculture industry HK$250 million.",
+        "scmp_article": []
+      },
+      {
+        "location": "Wuhan, China",
+        "lat": "30.592850",
+        "lon": "114.305539",
         "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt3_2.jpg",
+        "caption_hd": "",
+        "caption_body": "El Niño-linked abnormal summer monsoon rains triggered catastrophic flooding across the Yangtze River basin in 1998. The disaster affected 223 million people, caused over 3,000 fatalities, and displaced 15 million. Floodwaters inundated 23 million hectares of crops and destroyed millions of homes. Total direct economic losses surpassed US$30 billion, marking one of the most severe natural disasters in modern Chinese history.",
+        "scmp_article": [
+          {
+            "story_hd": "Death toll rises to 250 after fierce storms",
+            "story_link": "https://www.scmp.com/article/199463/death-toll-rises-250-after-fierce-storms"
+          }
+        ]
+      },
+      {
+        "location": "Kalimantan, Indonesia",
+        "lat": "-0.789275",
+        "lon": "113.921327",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt3_3.jpg",
+        "caption_hd": "",
+        "caption_body": "A severe El Niño-induced drought transformed traditional land-clearing fires into an unprecedented ecological disaster. Fires burned nearly 10 million hectares of forest, including 1 million hectares of carbon-rich peatland. The resulting toxic haze blanketed Southeast Asia, affecting 70 million people. Direct fire-related losses and haze damages across the region exceeded $4.5 billion, devastating local economies and global carbon sinks.",
+        "scmp_article": []
+      },
+      {
+        "location": "Tumbes, Peru",
+        "lat": "-3.565620",
+        "lon": "-80.451538",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt3_4.jpg",
+        "caption_hd": "",
+        "caption_body": "The typically arid coastal region was devastated by intense rainfall, receiving roughly 3,300mm—over 16 times its annual average of less than 200 mm. Catastrophic flooding destroyed bridges, roads, and agricultural lands, isolating rural communities and inflating local food prices. Furthermore, stagnant floodwaters catalyzed severe localized outbreaks of malaria, cholera, and acute respiratory infections.",
+        "scmp_article": []
+      },
+      {
+        "location": "Wajir, Kenya",
+        "lat": "1.747123",
+        "lon": "40.057345",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt3_9.jpg",
+        "caption_hd": "",
+        "caption_body": "Unprecedented heavy rains triggered massive flooding in northeastern Kenya, submerging roads and isolating communities. The sudden influx of water in the drylands bred ideal conditions for mosquitoes. This triggered a severe falciparum malaria epidemic with an attack rate of nearly 40% in Wajir, while a concurrent outbreak of Rift Valley fever decimated local livestock and worsened the humanitarian crisis.",
+        "scmp_article": []
+      },
+      {
+        "location": "California, United States",
+        "lat": "37.774929",
+        "lon": "-122.419416",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt3_7.jpg",
+        "caption_hd": "",
+        "caption_body": "Relentless El Niño-driven winter storms battered the region with extreme precipitation. Saturated hillside soils failed, triggering thousands of landslides across 10 counties throughout the winter and spring of 1998. The widespread earth movements destroyed homes, blocked major transportation routes, and inflicted over $150 million in direct property and infrastructural damage across the Bay Area.",
+        "scmp_article": []
+      },
+      {
+        "location": "Florida, United States",
+        "lat": "27.950575",
+        "lon": "-82.457178",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt3_8.jpg",
+        "caption_hd": "",
+        "caption_body": "A strong southern jet stream fueled extreme winter weather across the southeastern United States. Tampa endured unprecedented precipitation, recording a staggering 15.57 inches of rain in a single month. This extreme deluge inundated local infrastructure and agricultural fields, contributing to an anomalous severe weather season that included Florida's deadliest tornado outbreak in early 1998.",
+        "scmp_article": []
+      },
+      {
+        "location": "Guayaquil, Ecuador",
+        "lat": "-0.1807",
+        "lon": "-77.0428",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt3_5.jpg",
+        "caption_hd": "",
+        "caption_body": "Extreme ocean warming fueled relentless rainfall and severe flash floods across coastal Ecuador. The extreme weather damaged thousands of homes, destroyed vital transportation infrastructure, and ravaged agricultural production. Socioeconomic losses for the country exceeded $2.8 billion. Furthermore, the widespread, stagnant floodwaters sparked severe outbreaks of water- and vector-borne diseases, including cholera and malaria, deeply affecting vulnerable coastal and rural communities.",
+        "scmp_article": []
+      },
+      {
+        "location": "Western Provence, Papua New Guinea",
+        "lat": "-6.787052866671143",
+        "lon": "141.77206291070587",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt3_6.jpg",
+        "caption_hd": "",
+        "caption_body": "Severe drought and El Niño-induced reductions in night-time cloud cover led to devastating, unusual August frosts. These extreme temperature swings destroyed staple sweet potato crops and wild food plants. ",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "One of the most powerful and destructive climate events in recorded history. Exceptionally warm waters in the eastern Pacific altered global weather patterns, leading to severe disruptions worldwide. It triggered record-breaking rainfall and flooding across Peru, California, and East Africa, spawning deadly disease outbreaks. Simultaneously, it induced catastrophic droughts in Southeast Asia, culminating in massive forest fires in Indonesia. Global economic losses were estimated to exceed $36 billion, with tens of thousands of fatalities and profound, long-lasting damage to ecosystems, agriculture, and infrastructure across multiple continents.",
+    "scmp_article": [
+      {
+        "story_hd": "Crops at risk as El Nino worries ripple across Asia",
+        "story_link": "https://www.scmp.com/print/business/economy/article/1506929/crops-risk-el-nino-worries-ripple-across-asia"
+      }
+    ]
+  },
+  {
+    "id": "evt4",
+    "label": "2015-2016 Super El Niño",
+    "event_type": "El Nino",
+    "start": "2015, 3",
+    "end": "2016, 5",
+    "pois": [
+      {
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt4_1.jpg",
+        "caption_hd": "",
+        "caption_body": "El Niño contributed to extreme temperature anomalies, making 2015 the warmest year on record at the time, with an annual mean temperature of 24.2°C. While 2015 saw a rainfall deficit, lingering atmospheric effects in 2016 brought a record-breaking autumn rainfall of 1,078.8 mm. This volatile shift culminated in the unprecedented issuance of a Black Rainstorm Warning in October 2016.",
+        "scmp_article": [
+          {
+            "story_hd": "Hong Kong sweating towards hottest year on record as El Nino and global warming take effect",
+            "story_link": "https://www.scmp.com/news/hong-kong/health-environment/article/1884031/hong-kong-sweating-towards-hottest-year-record-el"
+          },
+          {
+            "story_hd": "El Nino effect: Hong Kong sees fewer typhoons and below half the usual rainfall for August and September",
+            "story_link": "https://www.scmp.com/news/hong-kong/health-environment/article/1862196/el-nino-effect-hong-kong-sees-fewer-typhoons-and"
+          }
+        ]
+      },
+      {
+        "location": "Yunnan, China",
+        "lat": "25.044863785546248",
+        "lon": "101.5274274703081",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt4_2.jpg",
+        "caption_hd": "",
+        "caption_body": "Northern and southwestern China experienced severe droughts and suppressed northerly winds, which severely exacerbated regional air pollution and caused dangerously high concentrations of PM2.5 haze.",
+        "scmp_article": []
+      },
+      {
+        "location": "Hunan, China",
+        "lat": "27.293850572789115",
+        "lon": "112.69282515405288",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt4_4.jpg",
+        "caption_hd": "",
+        "caption_body": "An anomalous lower-troposphere circulation brought substantial moisture to southern and eastern China. This resulted in severely increased precipitation and devastating floods throughout the Yangtze River basin during the summer of 2016.",
+        "scmp_article": []
+      },
+      {
+        "location": "Mindanao, Philippines",
+        "lat": "7.190708",
+        "lon": "125.455341",
+        "media_type": "video",
+        "media_url": "https://www.youtube.com/watch?v=Z1eY-NWuBXQ",
+        "caption_hd": "",
+        "caption_body": "A severe drought gripped the country, heavily impacting the agricultural heartland of Mindanao. Below-normal rainfall affected over 60 provinces nationwide by early 2016. The extreme dry spell devastated crop production, pushing hundreds of thousands into food insecurity. Local authorities declared states of calamity across multiple municipalities as water sources dried up and agricultural damages mounted into the tens of millions of dollars.",
+        "scmp_article": []
+      },
+      {
+        "location": "South Sumatra, Indonesia",
+        "lat": "-2.990934",
+        "lon": "104.756554",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt4_3.jpg",
+        "caption_hd": "",
+        "caption_body": "El Niño-induced drought fueled one of the worst fire seasons on record across Sumatra and Kalimantan. Rampant peatland fires emitted massive greenhouse gases and blanketed the region in toxic haze. Millions were exposed to hazardous air quality for over two months. The prolonged dry conditions also slashed national coffee production by 20% and caused domestic rice prices to climb 25% above government limits. ",
+        "scmp_article": [
+          {
+            "story_hd": "Out of control: Experts fear emissions from Indonesian fires could have ripple effect on atmosphere of the entire planet",
+            "story_link": "https://www.scmp.com/news/asia/article/1868302/out-control-experts-fear-emissions-indonesian-fires-could-have-ripple"
+          }
+        ]
+      },
+      {
+        "location": "Limpopo, South Africa",
+        "lat": "-23.401298",
+        "lon": "29.417932",
+        "media_type": "image",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "The region suffered its most intense drought in the historical record, with an estimated return period of over 200 years. Massive surface water deficits severely suppressed groundwater recharge. Across Southern Africa, nearly 40 million people faced acute food insecurity as agricultural production collapsed and livestock herds were decimated by starvation.",
+        "scmp_article": []
+      },
+      {
+        "location": "Dar es Salaam, Tanzania",
+        "lat": "-6.792440",
+        "lon": "39.208332",
+        "media_type": "image",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "El Niño brought anomalous heavy rains and severe flooding to East Africa, contaminating local drinking water sources with sewage. This triggered one of Tanzania's worst cholera outbreaks, with reported cases in 2015 and 2016 ranking as the second and third highest over an 18-year period.",
+        "scmp_article": []
+      },
+      {
+        "location": "Great Barrier Reef, Australia",
+        "lat": "-18.287067",
+        "lon": "147.699158",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt4_5.jpg",
+        "caption_hd": "",
+        "caption_body": "Reduced cloud cover and record-high ocean temperatures triggered the most severe and widespread coral bleaching event ever recorded on the reef. The unprecedented heat stress decimated massive swaths of the ecosystem, fundamentally altering marine biodiversity and inflicting immense long-term ecological damage on the World Heritage site.",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "One of the strongest ever recorded. It triggered extreme weather worldwide, causing devastating droughts in Southern Africa, Central America, and Southeast Asia, leaving over 60 million people food insecure and decimating crop yields. Conversely, it brought severe flooding to East Africa and South America. These climate anomalies created ideal conditions for deadly disease outbreaks, including dengue in the Americas and cholera in Tanzania. The phenomenon also induced record-breaking global heat, fueling devastating wildfires and causing unprecedented coral bleaching across the Great Barrier Reef.",
+    "scmp_article": [ 
+      {
+        "story_hd": "Climate change deal in Paris is crucial for Asia’s ability to thrive",
+        "story_link": "https://www.scmp.com/comment/insight-opinion/article/1877381/climate-change-deal-paris-crucial-asias-ability-thrive"
+      }
+    ]
+  },
+  {
+    "id": "evt5",
+    "label": "2023-2024 El Nino",
+    "event_type": "El Nino",
+    "start": "2023, 6",
+    "end": "2024, 4",
+    "pois": [
+      {
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt5_1.jpg",
+        "caption_hd": "",
+        "caption_body": "El Niño contributed to making 2023 the second warmest year on record, featuring 54 'Very Hot Days.' It also fueled severe storms; in September 2023, Super Typhoon Saola triggered a rare Hurricane Signal No. 10. Days later, a phenomenal rainstorm dumped 1,067.1 mm of rain in September alone—more than three times the monthly normal—causing catastrophic urban flooding and severely disrupting the city.",
+        "scmp_article": [
+          {
+            "story_hd": "Hong Kong braces for another sweltering year, with 5 to 8 typhoons predicted",
+            "story_link": "https://www.scmp.com/news/hong-kong/health-environment/article/3256249/hong-kong-braces-another-sweltering-year-5-8-typhoons-predicted"
+          }
+        ]
+      },
+      {
+        "location": "Hunan, China",
+        "lat": "29.537500",
+        "lon": "112.545833",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt5_2.jpg",
+        "caption_hd": "",
+        "caption_body": "El Niño disrupted the East Asian monsoon, unleashing severe climate extremes. Following intense winter droughts in the southwest, the Yangtze River basin endured record-breaking summer downpours in 2024. The heaviest continuous rainfall since 1961 caused water levels to surge past alarm lines, ultimately bursting the Dongting Lake dike in Huarong County. The catastrophic flooding displaced thousands, devastated agricultural tracts, and severely damaged regional infrastructure.",
+        "scmp_article": [
+          {
+            "story_hd": "Floods move to China’s drought-hit farmland as Dongting Lake wall repair holds",
+            "story_link": "https://www.scmp.com/news/china/article/3269743/floods-move-chinas-drought-hit-farmland-dongting-lake-wall-repair-holds"
+          }
+        ]
+      },
+      {
+        "location": "Amazonas, Brazil",
+        "lat": "-3.119027",
+        "lon": " -60.021731",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt5_3.jpg",
+        "caption_hd": "",
+        "caption_body": "The region endured an unprecedented drought, with the Amazon's rivers reaching their lowest levels since 1902. In September 2023, nearly 7,000 wildfires ravaged Amazonas state. The massive smoke plumes severely impacted over 2 million residents in Manaus. The extreme drought disrupted potable water access, halted river transport, and triggered mass mortality of fish and aquatic mammals, deeply affecting river-dwelling communities.",
+        "scmp_article": []
+      },
+      {
+        "location": "Southern Province, Zambia",
+        "lat": "-16.806482",
+        "lon": "26.985655",
+        "media_type": "",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "Southern Africa experienced its worst drought in over a century, prompting a national disaster declaration in Zambia. The dry spell destroyed roughly 1 million hectares of maize—nearly 45% of the country's total planted area. Agricultural losses were estimated at $804.8 million. Southern Province was exceptionally hard-hit, with 94% of its livestock farmers suffering profound impacts due to depleted water and pasture.",
+        "scmp_article": []
+      },
+      {
+        "location": "Nairobi, Kenya",
+        "lat": "-1.292066",
+        "lon": "36.821946",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt5_4.jpg",
+        "caption_hd": "",
+        "caption_body": "El Niño triggered devastating heavy rains and flash floods. In April and May 2024, the deluge caused the Nairobi and Athi rivers to burst their banks, inundating densely populated settlements. Nationwide, catastrophic flooding killed over 300 people, displaced 300,000, and swept away critical infrastructure. The disaster also ruined 24,000 acres of farmland and killed thousands of livestock, compounding regional humanitarian challenges.",
+        "scmp_article": []
+      },
+      {
+        "location": "Rio Grande do Sul, Brazil",
+        "lat": "-30.034647",
+        "lon": "-51.217658",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt5_5.jpg",
+        "caption_hd": "",
+        "caption_body": "Intensified by El Niño, the state of Rio Grande do Sul endured a series of historic storms. Catastrophic flooding struck first in September 2023 and returned with devastating force in May 2024. The extreme precipitation overwhelmed urban infrastructure and river systems around Porto Alegre, displacing hundreds of thousands of people, claiming dozens of lives, and causing billions in agricultural and property damages.",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "A strong climate anomaly that amplified global warming, contributing to the hottest 12-month period on record. It triggered widespread, severe weather extremes. Catastrophic droughts struck the Amazon Basin, causing record-low river levels and massive wildfires. Southern Africa suffered its driest February in over a century, devastating agriculture and leaving millions food insecure. Conversely, East Africa, particularly Kenya and Tanzania, experienced unprecedented heavy rainfall and catastrophic flooding that claimed hundreds of lives, displaced hundreds of thousands, and destroyed vital infrastructure.",
+    "scmp_article": [
+      {
+        "story_hd": "2023 confirmed as planet Earth’s hottest year ever, and ‘very likely’ warmest in 100,000 years",
+        "story_link": "https://www.scmp.com/news/world/article/3247841/2023-confirmed-planet-earths-hottest-year-ever-and-very-likely-warmest-100000-years"
+      },
+      {
+        "story_hd": "South China’s Guangzhou reports ‘earliest summer since 1961’ in global warming, El Nino double whammy",
+        "story_link": "https://www.scmp.com/news/china/science/article/3257326/south-chinas-guangzhou-reports-earliest-summer-1961-global-warming-el-nino-double-whammy"
+      }
+    ]
+  },
+  {
+    "id": "evt6",
+    "label": "1998-2000 La Nina",
+    "event_type": "La Nina",
+    "start": "1998, 7",
+    "end": "2000, 6",
+    "pois": [
+      {
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt6_1.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña conditions fueled a highly unusual 1999 typhoon season. In September, Typhoon York necessitated the Hurricane Signal No. 10 for the first time in 16 years, remaining in force for a record 11 hours. Just prior, Typhoon Sam became the wettest tropical cyclone to ever affect the territory, dumping a record-breaking 616.5 mm of rain. The extreme storms caused immense flooding, hundreds of injuries, and significant infrastructural damage across the city.",
+        "scmp_article": [
+          {
+            "story_hd": "Typhoon York kills 2 people and injures hundreds in Hong Kong in 1999",
+            "story_link": "https://www.scmp.com/news/hong-kong/health-environment/article/3278378/typhoon-york-kills-2-people-and-injures-hundreds-hong-kong-1999-scmp-archive"
+          }
+        ]
+      },
+      {
+        "location": "Santo Tomas, Guatemala",
+        "lat": "15.692103987078967",
+        "lon": "-88.60560380421151",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt6_2.jpg",
+        "caption_hd": "",
+        "caption_body": "The developing La Niña fueled an exceptionally active 1998 Atlantic hurricane season, spawning the catastrophic Hurricane Mitch. Striking Central America in October, Mitch stalled and dropped historic rainfall—unofficially up to 75 inches—over the region. In Guatemala, the cataclysmic deluge triggered massive mudslides and severe flooding that wiped out entire villages, devastated the nation's vital agricultural sector, and claimed hundreds of lives, severely setting back the country's economic development.",
         "scmp_article":[
           {
-            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "story_link": "https://www.scmp.com/xxxxxxxx"
+            "story_hd": "Storm kills at least 801",
+            "story_link": "https://www.scmp.com/article/260891/storm-kills-least-801"
+          }
+        ]
+      },
+      {
+        "location": "Pacific Northwest Coast, United States",
+        "lat": "44.636783",
+        "lon": "-124.053459",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt6_3.jpg",
+        "caption_hd": "",
+        "caption_body": "The 1998–1999 La Niña winter slammed the Pacific Northwest with extreme maritime weather. Between 17 and 22 major storms battered the coastline, generating monstrous waves that peaked at 46 feet. This relentless barrage caused catastrophic coastal erosion, destroyed critical coastal infrastructure, and severely damaged marine and parkland ecosystems across Washington, Oregon, and Northern California.",
+        "scmp_article":[
+          {
+            "story_hd": "",
+            "story_link": ""
           }
         ]
       },{
-        "location": "xxxxxx",
-        "lat": "-19",
-        "lon": "-60",
+        "location": "Chókwè, Mozambique",
+        "lat": "-24.529235",
+        "lon": "33.011624",
         "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-        "scmp_article":[]
-      },{
-        "location": "xxxxxx",
-        "lat": "48",
-        "lon": "79",
-        "media_type": "image",
-        "media_url": "xxxxxx",
-        "caption_hd": "Lorem ipsum dolor sit amet",
-        "caption_body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt6_4.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña conditions brought excessive rainfall to southern Africa, culminating in catastrophic flooding in early 2000. Compounded by Cyclone Leon-Eline, the Limpopo River burst its banks, completely inundating Chókwè. The disaster killed roughly 800 people, displaced nearly 463,000, wiped out massive tracts of arable land, and inflicted $500 million in damages, severely crippling the nation's agricultural economy.",
         "scmp_article":[
           {
-            "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "story_link": "https://www.scmp.com/xxxxxxxx"
+            "story_hd": "",
+            "story_link": ""
+          }
+        ]
+      },{
+        "location": "Vargas, Venezuela",
+        "lat": "10.605278",
+        "lon": " -66.938479",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt6_5.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña-enhanced moisture fueled catastrophic torrential rains in December 1999, dumping over 911 mm of rain in just 52 hours. This triggered massive debris flows and flash floods along the steep coastal mountains. The 'Vargas tragedy' destroyed over 8,000 homes, killed an estimated 30,000 people, and caused nearly $1.8 billion in damages, marking one of the deadliest landslide events in modern history. ",
+        "scmp_article":[
+          {
+            "story_hd": "",
+            "story_link": ""
           }
         ]
       }
     ],
-    "event_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "scmp_article":[
+    "event_desc": "The 1998–2000 La Niña was a protracted, intense cold episode that triggered devastating global climate anomalies. Emerging rapidly after the 'El Niño of the Century,' it delivered a catastrophic 'one-two punch' to global weather systems. The altered atmospheric circulation fueled torrential rains and catastrophic floods in Venezuela, Mozambique, and Bangladesh. Conversely, it induced severe, prolonged droughts across the southern United States and parts of East Africa. This multi-year anomaly drastically altered monsoon patterns, influenced an active Atlantic hurricane season, and caused tens of billions of dollars in economic and infrastructural damages worldwide.",
+    "scmp_article": [
       {
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
-      },{
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
-      },{
-        "story_hd": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "story_link": "https://www.scmp.com/xxxxxxxx"
+        "story_hd": "",
+        "story_link": ""
+      }
+    ]
+  },
+  {
+    "id": "evt7",
+    "label": "2007-2008 La Nina",
+    "event_type": "La Nina",
+    "start": "2007, 7",
+    "end": "2008, 6",
+    "pois": [
+      {
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
+        "media_type": "image",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "Influenced by the same La Niña-driven atmospheric blocking that caused China's snowstorms, Hong Kong endured its longest cold spell in 40 years. From late January to mid-February 2008, the minimum temperature remained below 12°C for an unprecedented 24 consecutive days. The prolonged, gloomy, and chilly weather prompted continuous Cold Weather Warnings for nearly 600 hours, severely impacting public health and the elderly.",
+        "scmp_article": [
+          {
+            "story_hd": "",
+            "story_link": ""
+          }
+        ]
+      },
+      {
+        "location": "Hunan, China",
+        "lat": "27.610410",
+        "lon": "111.708845",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt7_1.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña fueled an extreme convergence of cold Siberian air and moist southern air, triggering China's worst winter storms in 50 years. From January to February 2008, heavy snow and freezing rain devastated the region. The disaster destroyed millions of hectares of crops, caused massive power blackouts, collapsed roofs, and paralyzed transport during the Lunar New Year rush, inflicting roughly $21 billion in national economic damages.",
+        "scmp_article":[
+          {
+            "story_hd": "Snowstorm toll 111b yuan and 107 lives",
+            "story_link": "https://www.scmp.com/article/626214/snowstorm-toll-111b-yuan-and-107-lives"
+          }
+        ]
+      },
+      {
+        "location": "Beni, Bolivia",
+        "lat": "-14.175113",
+        "lon": " -65.151745",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt7_2.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña significantly amplified the South American monsoon, unleashing torrential rains between November 2007 and April 2008. The ensuing catastrophic floods devastated the low-lying Beni region and surrounding departments. Nationally, the disaster affected over 120,000 households, caused 74 fatalities, and inflicted an estimated $511 million in damages—roughly 3.4% of Bolivia's GDP—severely crippling agricultural and livestock production."
+      },
+      {
+        "location": "Tennessee, United States",
+        "lat": "35.517491",
+        "lon": "-86.580447",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt7_3.jpg",
+        "caption_hd": "",
+        "caption_body": "A La Niña-altered jet stream created immense atmospheric instability across the southern United States. In early February 2008, this culminated in the catastrophic 'Super Tuesday' tornado outbreak. The violent storm system spawned 87 tornadoes across several states, severely impacting Tennessee, where 31 people died. The outbreak caused over $1 billion in damages and stood as one of the deadliest in modern U.S. history."
+      }
+    ],
+    "event_desc": "a moderate-to-strong cooling of the equatorial Pacific that caused significant global weather extremes. It triggered one of the worst winter storm and freezing rain disasters in China's history, paralyzing transportation and destroying infrastructure. The altered climate patterns also caused catastrophic flooding across South America, particularly in Bolivia, while inducing severe drought conditions in Argentina. In the United States, a modified jet stream contributed to an unusually active and deadly early-season tornado outbreak. The event profoundly disrupted agriculture, claimed hundreds of lives, and caused tens of billions of dollars in global economic damages.",
+    "scmp_article": [
+      {
+        "story_hd": "Wild card named La Nina to blame for bad weather",
+        "story_link": "https://www.scmp.com/article/624934/wild-card-named-la-nina-blame-bad-weather"
+      }
+    ]
+  },
+  {
+    "id": "evt8",
+    "label": "2010-2011 La Nina",
+    "event_type": "La Nina",
+    "start": "2010, 6",
+    "end": "2011, 5",
+    "pois": [
+      {
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
+        "media_type": "image",
+        "media_url": "",
+        "caption_hd": "",
+        "caption_body": "La Niña amplified the winter northeast monsoon, making early 2011 exceptionally cold and dry. January's mean temperature dropped to 13.7°C, the lowest since 1977. The dry airstream heavily suppressed precipitation; 2011's total annual rainfall plummeted to just 1,487.2 mm, the lowest recorded since 1963. Furthermore, March saw a record-low mean relative humidity of 71%, significantly elevating local fire risks.",
+        "scmp_article": [
+          {
+            "story_hd": "",
+            "story_link": ""
+          }
+        ]
+      },
+      {
+        "location": "Shandong, China",
+        "lat": "36.651216",
+        "lon": "117.120098",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt8_3.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña significantly disrupted winter precipitation patterns, triggering North China's worst drought in 50 years. In late 2010, Shandong received a mere 9 mm of rain—86% below average. The extreme moisture deficit devastated regional agriculture, heavily damaging 1.84 million hectares of vital cropland. Additionally, the acute water shortage left approximately 240,000 residents without adequate access to drinking water.",
+        "scmp_article": [
+          {
+            "story_hd": "Rain at last but no end to drought",
+            "story_link": "https://www.scmp.com/article/739019/rain-last-no-end-drought"
+          }
+        ]
+      },
+      {
+        "location": "Queensland, Australia",
+        "lat": "-27.470453",
+        "lon": "153.026032",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt8_1.jpg",
+        "caption_hd": "La Niña caused Queensland's wettest December on record in 2010, triggering catastrophic flooding. Rivers swelled to historic levels, inundating Brisbane and dozens of towns. The disaster claimed at least 35 lives, evacuated thousands, and severely impacted agricultural and coal production. Total economic damages reached roughly A$6 billion, prompting widespread disaster declarations and massive reconstruction efforts.",
+        "scmp_article":[
+          {
+            "story_hd": "Battered Brisbane seeks to bounce back",
+            "story_link": "https://www.scmp.com/article/965564/battered-brisbane-seeks-bounce-back"
+          }
+        ]
+      },
+      {
+        "location": "Batticaloa District, Sri Lanka",
+        "lat": "7.710216",
+        "lon": "81.692375",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt8_2.jpg",
+        "caption_hd": "",
+        "caption_body": "In January 2011, La Niña-fueled torrential rains triggered catastrophic flooding across eastern Sri Lanka. Floodwaters reached near 100-year highs, destroying the crucial paddy harvest and threatening regional food security. The disaster claimed 43 lives nationwide and forced over 360,000 people to evacuate. In the hard-hit Batticaloa district alone, roughly 95,000 families were directly affected, with thousands of homes obliterated.",
+        "scmp_article":[]
+      },
+      {
+        "location": "Texas, United States",
+        "lat": "31.0545",
+        "lon": "-97.5635",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt8_4.jpg",
+        "caption_hd": "",
+        "caption_body": "A La Niña-altered jet stream deflected storm tracks away from the southern U.S., plunging Texas into its driest calendar year on record in 2011. The exceptional drought devastated the state's agricultural industry, causing over $7.6 billion in crop and livestock losses. The extremely hot, dry conditions also fueled historic, destructive wildfires that burned millions of acres.",
+        "scmp_article":[]
+      },
+      {
+        "location": "Mogadishu, Somalia",
+        "lat": "2.0373",
+        "lon": "45.3264",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt8_5.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña suppressed moisture in East Africa, leading to consecutive failed rainy seasons in 2010 and 2011. This triggered the region's worst drought in 60 years. In Somalia, the extreme dry spell decimated agriculture and livestock, culminating in a severe famine that threatened millions with acute food insecurity and prompted a massive international humanitarian intervention.",
+        "scmp_article":[]
+      },
+      {
+        "location": "Bogotá, Colombia",
+        "lat": "4.710989",
+        "lon": "-74.072092",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt8_6.jpg",
+        "caption_hd": "",
+        "caption_body": "The climate anomaly fueled Colombia's most devastating rainy season in 40 years. Continuous torrential rains from late 2010 to 2011 triggered massive flooding and landslides across 70% of the country. The disaster killed over 300 people, left 1.5 million homeless, and flooded over 1 million hectares of agricultural land. Economic losses exceeded $880 million, severely disrupting national infrastructure.",
+        "scmp_article":[]
+      }
+    ],
+    "event_desc": "The 2010–2012 La Niña was one of the strongest on record. It triggered widespread extreme weather by strengthening Pacific trade winds and altering global precipitation patterns. It caused catastrophic, record-breaking floods across eastern Australia, Colombia, and Pakistan. Conversely, the climate shift suppressed rainfall in the southern United States and the Horn of Africa, leading to historic droughts, devastating wildfires, and severe famine. Furthermore, the event contributed to an unusually active North Atlantic hurricane season while suppressing tropical cyclone activity in the Pacific.",
+    "scmp_article": [
+      {
+        "story_hd": "How La Niña’s icy grip may bolster China’s resolve in the South China Sea",
+        "story_link": "https://www.scmp.com/business/global-economy/article/2124837/how-la-ninas-icy-grip-may-bolster-chinas-resolve-south-china"
+      }
+    ]
+  },
+  {
+    "id": "evt9",
+    "label": "2020-2023 La Nina",
+    "event_type": "La Nina",
+    "start": "2020, 9",
+    "end": "2023, 3",
+    "pois": [
+      {
+        "location": "Hong Kong, China",
+        "lat": "22.319304",
+        "lon": "114.169361",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt9_1.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña contributed to an unusually active late-season typhoon period. In October 2021, Tropical Storm Lionrock and Typhoon Kompasu successively battered the city. This necessitated No. 8 Gale Signals with a record-short break of just 60 hours and 40 minutes between them. Kompasu alone brought over 100 mm of rain, raised water levels by over a meter, and caused severe flooding, roughly 900 fallen trees, and at least 20 injuries.",
+        "scmp_article": [
+          {
+            "story_hd": "Typhoon Kompasu roars past Hong Kong, leaving 1 dead and 20 injured",
+            "story_link": "https://www.scmp.com/news/hong-kong/health-environment/article/3152160/typhoon-kompasus-no-8-warning-set-outlast"
+          },
+          {
+            "story_hd": "Typhoon Kompasu to cost Hong Kong between HK$2 billion and HK$3 billion in economic losses",
+            "story_link": "https://www.scmp.com/news/hong-kong/hong-kong-economy/article/3152207/typhoon-kompasu-cost-hong-kong-between-hk2-billion"
+          }
+        ]
+      },
+      {
+        "location": "Jiangxi, China",
+        "lat": "28.682892",
+        "lon": "115.857963",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt9_2.jpg",
+        "caption_hd": "",
+        "caption_body": "La Niña disrupted atmospheric circulation, contributing to extreme heat and severe summer droughts across southern China in 2022. The Yangtze River basin experienced record-low water levels, with Poyang Lake shrinking by over 70% of its surface area. The extreme drought compromised drinking water for millions, disrupted hydropower generation, and devastated autumn grain crops across the region.",
+        "scmp_article": [
+          {
+            "story_hd": "Climate change: Chinese scientists say ‘flash droughts’ are becoming the new normal",
+            "story_link": "https://www.scmp.com/news/china/science/article/3217244/climate-change-chinese-scientists-say-flash-droughts-are-becoming-new-normal"
+          },
+          {
+            "story_hd": "China’s 2022 heatwave",
+            "story_link": "https://www.scmp.com/topics/chinas-2022-heatwave"
+          }
+        ]
+      },
+      {
+        "location": "Sindh, Pakistan",
+        "lat": "25.894348",
+        "lon": "68.524715",
+        "media_type": "video",
+        "media_url": "https://www.scmp.com/video/asia/3190156/over-800-people-killed-pakistan-floods-caused-monsoon-rains",
+        "caption_hd": "Amplified by La Niña and climate change, an intensified 2022 Asian summer monsoon triggered catastrophic flooding across Pakistan. Sindh was severely impacted, receiving nearly 800% of its normal August rainfall. Nationwide, floodwaters inundated one-third of the country, killing over 1,700 people, displacing 33 million, and inflicting roughly $30 billion in economic and infrastructural damages.",
+        "scmp_article":[
+          {
+            "story_hd": "Pakistan floods latest sign of climate injustice for Global South",
+            "story_link": "https://www.scmp.com/comment/opinion/article/3191496/pakistan-floods-latest-sign-climate-injustice-global-south"
+          }
+        ]
+      },
+      {
+        "location": "Buenos Aires, Argentina",
+        "lat": "-34.920556",
+        "lon": "-57.953611",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt9_4.jpg",
+        "caption_hd": "",
+        "caption_body": "Prolonged La Niña conditions suppressed rainfall, triggering a multi-year historic drought across southern South America. In Argentina, the 2022–2023 agricultural season suffered deeply, with wheat and soybean yields plummeting by over 40%. The severe moisture deficit, compounded by intense summer heatwaves, sparked widespread agricultural fires and cost the economy an estimated $20 billion in lost export revenue.",
+        "scmp_article":[
+          {
+            "story_hd": "",
+            "story_link": ""
+          }
+        ]
+      },
+      {
+        "location": "New South Wales, Australia",
+        "lat": "-28.810842",
+        "lon": "153.277815",
+        "media_type": "",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt9_5.jpg",
+        "caption_hd": "",
+        "caption_body": "Drove relentless extreme rainfall across eastern Australia, culminating in catastrophic flooding in early 2022. Lismore was devastated when the Wilsons River peaked at a record 14.4 meters in February. The deluge inundated thousands of homes and businesses, leading to mass evacuations. Across the eastern states, the multi-year wet conditions caused billions of dollars in infrastructure and property damage.",
+        "scmp_article":[
+          {
+            "story_hd": "",
+            "story_link": ""
+          }
+        ]
+      },
+      {
+        "location": "Baidoa, Somalia",
+        "lat": "3.113840",
+        "lon": "43.648348",
+        "media_type": "image",
+        "media_url": "https://multimedia.scmp.com/infographics/news/world/article/3356851/el_nino_la_nina/images/evt9_6.jpg",
+        "caption_hd": "",
+        "caption_body": "Fueled the most severe drought in the Horn of Africa's recorded history. With five consecutive failed rainy seasons by late 2022, over 20 million people regionally faced acute food insecurity. In Somalia, the dry spell decimated millions of livestock, displaced over 1 million people, and pushed vulnerable communities in the Bay region toward famine conditions.",
+        "scmp_article":[
+          {
+            "story_hd": "",
+            "story_link": ""
+          }
+        ]
+      }
+    ],
+    "event_desc": "The 2020–2023 La Niña was a rare, prolonged 'triple-dip' anomaly that significantly disrupted global climate patterns. By cooling the equatorial Pacific, it triggered cascading weather extremes over three consecutive years. It drove the longest and most severe drought in the Horn of Africa's recorded history and caused devastating agricultural droughts across southern South America and southern China. Conversely, it fueled catastrophic, record-breaking floods in eastern Australia and Pakistan, while also contributing to exceptionally active North Atlantic hurricane seasons in 2020 and 2021.",
+    "scmp_article": [
+      {
+        "story_hd": "Global warming to drive more extreme weather through multi-year La Ninas, climate scientists say",
+        "story_link": "https://www.scmp.com/news/china/science/article/3229890/global-warming-drive-more-extreme-weather-through-multi-year-la-ninas-climate-scientists-say"
+      },
+      {
+        "story_hd": "Asia set for supercharged heat as El Nino looms after 'hottest April' ever",
+        "story_link": "https://www.scmp.com/week-asia/health-environment/article/3219550/after-hottest-april-ever-asia-braces-new-extreme-weather-normal-el-nino-looms-supercharge-heat"
       }
     ]
   }

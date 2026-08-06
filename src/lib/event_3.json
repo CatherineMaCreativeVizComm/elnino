@@ -1,0 +1,168 @@
+[
+  {
+    "id": "evt10",
+    "label": "1957-58 El Nino",
+    "event_type": "El Nino",
+    "start": "1957, 4",
+    "end": "1958, 7",
+    "pois": [
+      {
+        "location": "china",
+        "lat": "36.4000",
+        "lon": "117.0000",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/4a77e015-3d93-4e68-aa35-4dc1e10e5086",
+        "caption_hd": "Drought in north and east China",
+        "caption_body": "While many parts of South China had been flooded in recent weeks because of torrential rains, land in North and East China had been thoroughly parched, according to Peking Radio",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "",
+    "scmp_article": []
+  },
+  {
+    "id": "evt11",
+    "label": "1965-66 El Nino",
+    "event_type": "El Nino",
+    "start": "1965, 5",
+    "end": "1966, 8",
+    "pois": [
+      {
+        "location": "New South Wales, Australia",
+        "lat": "-33.0000",
+        "lon": "151.0000",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/709996b8-2f73-4084-b8a1-24982512449f",
+        "caption_hd": "Wheat crops affected by drought",
+        "caption_body": "Below-average rainfall in the eastern states was expected to drastically slash wheat production in New South Wales and threaten crops in Victoria and South Australia, with official estimates predicting the national wheat harvest could be halved from the previous year's 160 million bushels. Western Australia was the only state where production remained secure, tracking toward a near-record 80 million bushels. Concurrently, the widespread drought was also projected to trigger a 10% drop in national wool production across most of the country.",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "",
+    "scmp_article": []
+  },
+  {
+    "id": "evt12",
+    "label": "1972-73 El Nino",
+    "event_type": "El Nino",
+    "start": "1972, 3",
+    "end": "1973, 4",
+    "pois": [
+      {
+        "location": "Peru",
+        "lat": "-12.0500",
+        "lon": "-77.0300",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/af674f19-d152-4713-9d63-07d958f2e07a",
+        "caption_hd": "Peru’s exports face ecology crisis",
+        "caption_body": "A severe ecological crisis affecting Peru's coastal region is threatening to wipe out half of the country's exports due to the near-total disappearance of protein-rich anchovies, which are critical for its world-leading fishmeal and fish oil industries. This crisis, driven by an unseasonably persistent El Niño current that caused massive coastal flooding and agricultural disruption, has cut fishmeal exports by 500,000 tons and left the state sales organization facing severe delivery penalties and widespread corporate bankruptcies.",
+        "scmp_article": []
+      },
+      {
+        "location": "Timbuktu, Mali",
+        "lat": "16.7735",
+        "lon": "-3.0074",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/bc23e749-7ffc-4d62-87c3-d1ee5cc6a8d3",
+        "caption_hd": "TIMBUKTU: where cows climb trees in search of food",
+        "caption_body": "Scientists trace the root of the catastrophic four-year drought directly to the 1972–1973 El Niño anomaly, which disrupted global atmospheric patterns and severely suppressed the West African monsoon, causing a total ecological collapse across Mali and five other Sahelian nations. With hundreds of traditional wells running bone dry and an estimated two-fifths of Mali’s five million cattle perishing from hunger—forcing desperate scenes of livestock attempting to climb trees for foliage—rural populations have begun a mass exodus toward urban centers.",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "",
+    "scmp_article": []
+  },
+  {
+    "id": "evt13",
+    "label": "1974-76 La Nina",
+    "event_type": "La Nina",
+    "start": "1974, 7",
+    "end": "1976, 4",
+    "pois": [
+      {
+        "location": "Queensland, Australia",
+        "lat": "-20.0000",
+        "lon": "153.0000",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/efb98ef9-2043-4d4d-aa45-2cd9b9428aad",
+        "caption_hd": "No let-up in Queensland floods ",
+        "caption_body": "Devastating floods have submerged one-fourth of Brisbane and one-third of rural Queensland, claiming six lives and causing over A$20 million in damage. Though Brisbane airport has reopened to allow for a massive food airlift to stranded towns, extreme rainfall continues to cause widespread power outages, halt all train and bus services, and block almost all roads into the city center. Compounded by a deadly chlorine gas leak at a flooded chemical plant that forced 300 evacuations, authorities have lost count of the thousands displaced as the Brisbane River nears a historic 22-foot peak—its highest since 1893.",
+        "scmp_article": []
+      },
+      {
+        "location": "Bangladesh",
+        "lat": "23.8108",
+        "lon": "90.4125",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/2280fe29-a0c3-4bcb-9a9f-7a43d84d3b06",
+        "caption_hd": "Bangladesh floods trap millions",
+        "caption_body": "Amid devastating floods in Bangladesh, Prime Minister Sheikh Mujibur Rahman has put the armed forces on high alert for a massive rescue operation to save roughly two million people marooned in waist-high waters, particularly in the rising flood zones of Habiganj. While the air force has intensified supply airdrops, their efforts are severely hindered by a lack of dry landing spots. The disaster has already claimed at least 500 lives due to the floods and ensuing epidemics—with cholera outbreaks reported in Netrakona, Noakhali, and Chittagong—while the rising waters have inundated low-lying areas of Dacca and completely suspended northern train services. ",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "",
+    "scmp_article": []
+  },
+  {
+    "id": "evt14",
+    "label": "1988-1989 La Nina",
+    "event_type": "La Nina",
+    "start": "1988, 5",
+    "end": "1989, 5",
+    "pois": [
+      {
+        "location": "The United State",
+        "lat": "44.5000",
+        "lon": "-110.0000",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/5cf6d89c-e2dc-436b-be54-eb0abd0fc379",
+        "caption_hd": "Montana blaze",
+        "caption_body": "About 1,000 firefighters were conducting a last-ditch operation near Yellowstone National Park to contain a massive 24,700-hectare wildfire, forcing the evacuation of around 300 residents from the Montana towns of Cooke City and Silver Gate.",
+        "scmp_article": []
+      },
+      {
+        "location": "Bangladesh",
+        "lat": "23.8108",
+        "lon": "90.4125",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/dd88378e-60aa-4750-b62c-2aad564a1f99",
+        "caption_hd": "Nine killed in Bangladesh monsoon floods",
+        "caption_body": "Heavy monsoon rains in Bangladesh have caused widespread flooding in northeastern and southern districts, killing nine people (six drowned in a boat capsizing near Chittagong, and three died from mud hut collapses in Sherpur and Netrokona) and leaving thousands stranded, with over 200,000 trapped in Sunamganj alone. Since last month, unofficial press reports estimate nearly 50 flood-related deaths, while the official government death toll stands at 25. ",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "",
+    "scmp_article": []
+  },
+  {
+    "id": "evt15",
+    "label": "1954-1956 La Nina",
+    "event_type": "La Nina",
+    "start": "1954, 5",
+    "end": "1956, 5",
+    "pois": [
+      {
+        "location": "The United State",
+        "lat": "44.5000",
+        "lon": "-110.0000",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/5cf6d89c-e2dc-436b-be54-eb0abd0fc379",
+        "caption_hd": "Montana blaze",
+        "caption_body": "About 1,000 firefighters were conducting a last-ditch operation near Yellowstone National Park to contain a massive 24,700-hectare wildfire, forcing the evacuation of around 300 residents from the Montana towns of Cooke City and Silver Gate.",
+        "scmp_article": []
+      },
+      {
+        "location": "Bangladesh",
+        "lat": "23.8108",
+        "lon": "90.4125",
+        "media_type": "image",
+        "media_url": "https://nexus.scmp.work/dd88378e-60aa-4750-b62c-2aad564a1f99",
+        "caption_hd": "Nine killed in Bangladesh monsoon floods",
+        "caption_body": "Heavy monsoon rains in Bangladesh have caused widespread flooding in northeastern and southern districts, killing nine people (six drowned in a boat capsizing near Chittagong, and three died from mud hut collapses in Sherpur and Netrokona) and leaving thousands stranded, with over 200,000 trapped in Sunamganj alone. Since last month, unofficial press reports estimate nearly 50 flood-related deaths, while the official government death toll stands at 25. ",
+        "scmp_article": []
+      }
+    ],
+    "event_desc": "",
+    "scmp_article": []
+  }
+]
